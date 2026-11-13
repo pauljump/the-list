@@ -4,13 +4,13 @@ Everything people have built for Claude Code and published on GitHub, with what 
 
 | | Entries | What it is |
 |---|---:|---|
-| [Plugins](plugins/) | 103,397 | entries of marketplace listings |
-| [Skills](skills/) | 620,011 | `SKILL.md` files |
-| [Agents](agents/) | 134,929 | subagent definitions, `agents/*.md` |
-| [Commands](commands/) | 130,136 | slash commands, `commands/*.md` |
-| [MCP servers](mcp-servers/) | 12,219 | servers named in `.mcp.json` files |
-| [Hooks](hooks/) | 37,509 | hook setups in `hooks.json` and `settings.json` |
-| [Repos](repos.csv) | 69,659 | every repo that holds any of the above |
+| [Plugins](plugins/) | 112,929 | entries of marketplace listings |
+| [Skills](skills/) | 902,914 | `SKILL.md` files |
+| [Agents](agents/) | 171,807 | subagent definitions, `agents/*.md` |
+| [Commands](commands/) | 165,826 | slash commands, `commands/*.md` |
+| [MCP servers](mcp-servers/) | 15,465 | servers named in `.mcp.json` files |
+| [Hooks](hooks/) | 50,874 | hook setups in `hooks.json` and `settings.json` |
+| [Repos](repos.csv) | 94,819 | every repo that holds any of the above |
 
 Start with [TOP.md](TOP.md) for the most installed and most copied.
 
@@ -22,7 +22,7 @@ Start with [TOP.md](TOP.md) for the most installed and most copied.
 
 ## How it was made
 
-1. **Find the repos** (2026-09-19 to 2026-11-13; most were found in September 2026). Anthropic's official, community and knowledge-work marketplaces; GitHub repo search on fifteen topics; GitHub code search for `marketplace.json`, `plugin.json`, `hooks.json` and hook settings; the claudemarketplaces.com sitemaps; ten awesome-lists; and every marketplace found inside any repo, followed in turn. 129,669 repos seen.
+1. **Find the repos** (2026-09-19 to 2026-11-13; most were found in September 2026). Anthropic's official, community and knowledge-work marketplaces; GitHub repo search on fifteen topics; GitHub code search for `marketplace.json`, `plugin.json`, `hooks.json` and hook settings; the claudemarketplaces.com sitemaps; ten awesome-lists; and every marketplace found inside any repo, followed in turn. 130,072 repos seen.
 2. **List their files.** One file listing per repo, keeping the paths that are Claude Code components.
 3. **Read the files** (2026-11-13). Each distinct file once, by its git hash, so the text matches the listing. Names and descriptions come from each file's own frontmatter.
 4. **Fold the copies.** Most of GitHub's skills are copies of other skills. Identical entries are shown once, at the original, with a count of how many repos carry them.
@@ -38,13 +38,12 @@ No model wrote or judged anything here. Every description is the author's own, c
 
 ## Numbers
 
-- **Skills:** 1,270,553 files found, 828,212 distinct, 707,693 read, 620,011 entries after folding copies.
-- **Agents:** 270,660 files found, 190,935 distinct, 158,507 read, 134,929 entries after folding copies.
-- **Commands:** 244,879 files found, 167,277 distinct, 141,963 read, 130,136 entries after folding copies.
-- **MCP servers:** 16,401 files found, 12,219 entries after folding copies.
-- **Hooks:** 49,335 files found, 37,509 entries after folding copies.
-- **Plugins:** 123,568 marketplace entries, 103,397 after folding copies, 91,280 with a description.
-- **Repos:** 129,669 seen, 75,839 opened, 13,371 already gone, 40,450 not opened yet.
-- **In progress:** 200,075 files are still being read; this list will grow.
+- **Skills:** 1,621,951 files found, 1,067,629 distinct, 1,047,995 read, 902,914 entries after folding copies.
+- **Agents:** 297,874 files found, 210,119 distinct, 204,191 read, 171,807 entries after folding copies.
+- **Commands:** 269,887 files found, 184,931 distinct, 181,090 read, 165,826 entries after folding copies.
+- **MCP servers:** 21,177 files found, 15,465 entries after folding copies.
+- **Hooks:** 67,169 files found, 50,874 entries after folding copies.
+- **Plugins:** 135,266 marketplace entries, 112,929 after folding copies, 101,094 with a description.
+- **Repos:** 130,072 seen, 104,534 opened, 15,751 already gone, 9,752 not opened yet.
 
 The scripts that read the files and build these pages are in `crawl/` and `build.py`. The crawl database itself is several gigabytes and is not in this repo.

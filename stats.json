@@ -2,24 +2,23 @@
  "crawl": "2026-09-19 to 2026-11-13",
  "read": "2026-11-13",
  "queue": {
-  "binary": 13,
-  "missing": 33562,
-  "ok": 1290776,
-  "pending": 200075
+  "binary": 25,
+  "missing": 35701,
+  "ok": 1831080
  },
  "plugins": {
-  "entries": 103397,
-  "pages": 92,
+  "entries": 112929,
+  "pages": 99,
   "csv": [
    "plugins.csv"
   ],
-  "rows": 123568,
-  "described": 91280,
-  "gone": 3408
+  "rows": 135266,
+  "described": 101094,
+  "gone": 3473
  },
  "skills": {
-  "entries": 620011,
-  "pages": 720,
+  "entries": 902914,
+  "pages": 1075,
   "csv": [
    "skills-1.csv",
    "skills-2.csv",
@@ -27,62 +26,66 @@
    "skills-4.csv",
    "skills-5.csv",
    "skills-6.csv",
-   "skills-7.csv"
+   "skills-7.csv",
+   "skills-8.csv",
+   "skills-9.csv",
+   "skills-10.csv"
   ],
-  "files": 1270553,
-  "unique": 828212,
-  "read": 707693,
-  "described": 619236
+  "files": 1621951,
+  "unique": 1067629,
+  "read": 1047995,
+  "described": 901702
  },
  "agents": {
-  "entries": 134929,
-  "pages": 155,
+  "entries": 171807,
+  "pages": 195,
   "csv": [
    "agents-1.csv",
    "agents-2.csv"
   ],
-  "files": 270660,
-  "unique": 190935,
-  "read": 158507,
-  "described": 134131
+  "files": 297874,
+  "unique": 210119,
+  "read": 204191,
+  "described": 170676
  },
  "commands": {
-  "entries": 130136,
-  "pages": 102,
+  "entries": 165826,
+  "pages": 128,
   "csv": [
-   "commands.csv"
+   "commands-1.csv",
+   "commands-2.csv"
   ],
-  "files": 244879,
-  "unique": 167277,
-  "read": 141963,
-  "described": 129714
+  "files": 269887,
+  "unique": 184931,
+  "read": 181090,
+  "described": 165184
  },
  "mcp-servers": {
-  "entries": 12219,
+  "entries": 15465,
   "pages": 27,
   "csv": [
    "mcp-servers.csv"
   ],
-  "files": 16401
+  "files": 21177
  },
  "hooks": {
-  "entries": 37509,
-  "pages": 36,
+  "entries": 50874,
+  "pages": 40,
   "csv": [
    "hooks.csv"
   ],
-  "files": 49335
+  "files": 67169
  },
  "repos": {
-  "entries": 69659,
-  "seen": 129669,
+  "entries": 94819,
+  "seen": 130072,
   "by_status": {
-   "treed": 75794,
-   "gone": 13371,
+   "treed": 104489,
+   "gone": 15751,
    "done": 45,
-   "empty": 9,
-   "resolved": 40254,
-   "new": 196
+   "empty": 35,
+   "new": 293,
+   "resolved": 9459
   }
  }
 }

@@ -3,7 +3,7 @@
 
     python3 crawl/fetch_text.py /path/to/signal.db prepare     # build the work queue (once)
     python3 crawl/fetch_text.py /path/to/signal.db enqueue     # add files found by a later tree pass
-    python3 crawl/fetch_text.py /path/to/signal.db run [--max-seconds N]
+    python3 crawl/fetch_text.py /path/to/signal.db run [--max-seconds N] [--follow]
     python3 crawl/fetch_text.py /path/to/signal.db status
 
 Read-only against GitHub: `gh api graphql` only, so the token stays inside gh. No model calls.
@@ -219,7 +219,7 @@ class Fetcher:
                 order by (coalesce(r.status,'')='gone'), coalesce(r.stars, 0) desc limit 1""", (row["sha"], *tried)).fetchone()
         return alt, tried
 
-    def run(self, max_seconds=None):
+    def run(self, max_seconds=None, follow=False):
         c = self.con
         start, last_call, n_ok, n_miss, calls, rate_waits, last_log = time.time(), 0.0, 0, 0, 0, 0, time.time()
         self.log(f"run: {c.execute('select count(*) from blob_queue where status is null').fetchone()[0]:,} pending")
@@ -229,8 +229,12 @@ class Fetcher:
                 break
             rows = c.execute("select * from blob_queue where status is null order by stars desc, repo limit 3000").fetchall()
             if not rows:
-                self.log("run: queue empty")
-                break
+                if not follow:
+                    self.log("run: queue empty")
+                    break
+                time.sleep(300)  # a tree pass is still opening repos: let files pile up, then take them
+                self.enqueue()
+                continue
             i = 0
             while i < len(rows):
                 if max_seconds and time.time() - start > max_seconds:
@@ -334,4 +338,4 @@ if __name__ == "__main__":
         f.status()
     else:
         secs = int(sys.argv[sys.argv.index("--max-seconds") + 1]) if "--max-seconds" in sys.argv else None
-        f.run(secs)
+        f.run(secs, follow="--follow" in sys.argv)
