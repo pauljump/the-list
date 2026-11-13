@@ -1,0 +1,270 @@
+# Skills
+
+200,896 skills: every distinct `SKILL.md` the crawl could read, with what it does.
+
+## Get it
+
+- [`skills-1.csv`](skills-1.csv) (43 MB)
+- [`skills-2.csv`](skills-2.csv) (43 MB)
+- [`skills-3.csv`](skills-3.csv) (5 MB)
+
+Columns: `name`, `description`, `repo`, `url`, `stars`, `license`, `last_pushed`, `copies`, `installs`, `installs_last_week`, `allowed_tools`, `skill_license`.
+
+## Notes
+
+- The crawl found 1,017,447 of these files across all repos; 690,088 are distinct. The text of 214,951 was read; 475,137 could not be (too large, binary, or gone from GitHub).
+- Entries with the same name and description are one entry, shown at the most-starred repo that is not a fork. `copies` is how many copies of the file the crawl found across GitHub.
+- 200,697 have a description: the file's own `description`, or its first paragraph when it has none. Cut at 600 characters.
+- `stars`, `license` and `last_pushed` belong to the repo.
+- `installs` and `installs_last_week` are from skills.sh, which counts installs made with `npx skills`. Blank means not listed there.
+- 10,211 entries come from skills.sh alone: listed there, in repos the crawl did not open.
+
+## Browse
+
+- [0-9-001](0-9-001.md): 772 entries, #E847C0 to 41-campaign-asset-list
+- [0-9-002](0-9-002.md): 424 entries, 41-campaign-asset-list-global to 🧠 Identity Persistence Layer
+- [a-001](a-001.md): 867 entries, a to Accessibility Auditor
+- [a-002](a-002.md): 847 entries, Accessibility Auditor to add-curve-format
+- [a-003](a-003.md): 852 entries, add-dark-mode to ads-pinterest
+- [a-004](a-004.md): 824 entries, ads-plan to agent-browser
+- [a-005](a-005.md): 899 entries, agent-browser to agent-testing-framework
+- [a-006](a-006.md): 886 entries, agent-testing-patterns to agui-dotnet-multimodal
+- [a-007](a-007.md): 766 entries, agui-dotnet-protobuf to ai-recipe-visualization
+- [a-008](a-008.md): 810 entries, ai-red-teaming to ajp-ghostcat
+- [a-009](a-009.md): 805 entries, ajps-data-analysis to alterlab-multilevel-models
+- [a-010](a-010.md): 765 entries, alterlab-networkx to analyze
+- [a-011](a-011.md): 826 entries, analyze to angular-patterns
+- [a-012](a-012.md): 886 entries, angular-performance to anwendungsbereich-berufliche-abweichende
+- [a-013](a-013.md): 913 entries, anwendungsfall-triage to apify-lead-generation
+- [a-014](a-014.md): 863 entries, apify-lead-generation to arbiter
+- [a-015](a-015.md): 919 entries, arbiter-commandquery to argocd-expert
+- [a-016](a-016.md): 800 entries, argocd-externalsecret-namespace-permission to ask
+- [a-017](a-017.md): 870 entries, ask to attacking-hardware-interfaces
+- [a-018](a-018.md): 809 entries, attacking-jwt to aufsichtsrat-kartellrecht-red-ki-einsatz
+- [a-019](a-019.md): 894 entries, aufsichtsrat-ki-einsatz-und-governance to automation-auto-agent
+- [a-020](a-020.md): 869 entries, automation-available-skills to axiom-audit-storage
+- [a-021](a-021.md): 785 entries, axiom-audit-swiftdata to azure-role-selector
+- [a-022](a-022.md): 154 entries, azure-role-selector to A股短线交易决策 A-Share Short-Term Decision
+- [b-001](b-001.md): 846 entries, b to Bar Exam
+- [b-002](b-002.md): 871 entries, bar-prep-questions to behavioral-modification
+- [b-003](b-003.md): 923 entries, behavioral-modification to bevy-ecs-patterns
+- [b-004](b-004.md): 757 entries, bevy-game-engine to bio-genome-assembly-contamination-detection
+- [b-005](b-005.md): 676 entries, bio-genome-assembly-genome-profiling to blast-radius
+- [b-006](b-006.md): 883 entries, blast-radius to board-governance
+- [b-007](b-007.md): 939 entries, board-meeting to brainstorming
+- [b-008](b-008.md): 874 entries, brainstorming to browser-7e96fe1d
+- [b-009](b-009.md): 902 entries, browser-7f9cefec to build-judge
+- [b-010](b-010.md): 850 entries, build-keil to business-model-canvas
+- [b-011](b-011.md): 200 entries, business-model-canvas to byzantinisches-recht-kaltstart
+- [c-001](c-001.md): 879 entries, c to canvas-apps-ui-gen
+- [c-002](c-002.md): 838 entries, canvas-automation to cathodic-protection-engineer
+- [c-003](c-003.md): 856 entries, cathodic-protection-example-ship-hull-abs-gn-ship… to champion-engagement-system
+- [c-004](c-004.md): 935 entries, champion-program to checking-freshness
+- [c-005](c-005.md): 839 entries, checking-hipaa-compliance to chunking-strategies
+- [c-006](c-006.md): 828 entries, chunking-strategy to classify-post-to-section
+- [c-007](c-007.md): 970 entries, classify-rep-profile to clean-cache
+- [c-008](c-008.md): 902 entries, clean-clean-cut to close-session
+- [c-009](c-009.md): 872 entries, close-spec to cocounsel-legal:deep-research
+- [c-010](c-010.md): 942 entries, cocounsel-legal:deep-research to codebase-knowledge-graph
+- [c-011](c-011.md): 912 entries, codebase-management to coll_video-edit
+- [c-012](c-012.md): 820 entries, collab-audit to commit-message
+- [c-013](c-013.md): 815 entries, commit-message to competitor-profiling
+- [c-014](c-014.md): 816 entries, competitor-profiling to conbio-literature-positioning
+- [c-015](c-015.md): 822 entries, conbio-reporting-and-data-policy to connect-recommend
+- [c-016](c-016.md): 792 entries, connect-required-verification-information to content-semantics-stinger
+- [c-017](c-017.md): 869 entries, content-seo to convention-injector
+- [c-018](c-018.md): 844 entries, convention-learner to cortex-recall-global
+- [c-019](c-019.md): 880 entries, cortex-recon to create-briefing
+- [c-020](c-020.md): 928 entries, create-builder to creative-brief-selector
+- [c-021](c-021.md): 822 entries, creative-campaign-concept to crucible-investigation-methodology
+- [c-022](c-022.md): 924 entries, crucible-meta-governance to custodian
+- [c-023](c-023.md): 648 entries, custody-solution-uptime-and-liveness-guarantees to czech-republic-vat-return
+- [d-001](d-001.md): 913 entries, d to data-frame-augmentation
+- [d-002](d-002.md): 824 entries, data-generation to dataset-verify
+- [d-003](d-003.md): 885 entries, datasets to dead-code-intolerance
+- [d-004](d-004.md): 879 entries, dead-dependencies to deep-interview
+- [d-005](d-005.md): 857 entries, deep-learning to dental-recall-reactivation
+- [d-006](d-006.md): 879 entries, dental-referral-letter to design-fhir-loinc-questionnaires
+- [d-007](d-007.md): 849 entries, design-first to detecting-command-and-control-over-dns
+- [d-008](d-008.md): 791 entries, detecting-command-and-control-over-dns to developer-audience-context
+- [d-009](d-009.md): 829 entries, developer-bump-version to didit-id-verification
+- [d-010](d-010.md): 885 entries, didit-kyc-onboarding to distill-feedback-from-history
+- [d-011](d-011.md): 875 entries, distill-memory to docker-to-k8s-manifests
+- [d-012](d-012.md): 925 entries, docker-to-sealos to dokumentationspflicht-und-protokollierung-geschae…
+- [d-013](d-013.md): 965 entries, dokumentationspflichten-protokoll-dsgvo to dpia-assessment
+- [d-014](d-014.md): 908 entries, dpia-automated-decisions to dt-setup-android
+- [d-015](d-015.md): 385 entries, dt-setup-flutter to dzrp-compare
+- [e-001](e-001.md): 854 entries, e to edmund-failure-archaeology
+- [e-002](e-002.md): 868 entries, edmund-live-repro-and-diagnostics to elements-of-style
+- [e-003](e-003.md): 877 entries, elen-decision-network to encrochat-anom-sky
+- [e-004](e-004.md): 884 entries, encrochat-anom-sky-ecc-krypto to epigenome-profiling
+- [e-005](e-005.md): 939 entries, epigraphdb-skill to etsy-social-media-marketing
+- [e-006](e-006.md): 814 entries, etsy-star-seller to Evolution WhatsApp Skill
+- [e-007](e-007.md): 864 entries, evolution-api to experiment-bridge
+- [e-008](e-008.md): 830 entries, experiment-brief to external-gitcode-ascend-triton-operator-precision…
+- [e-009](e-009.md): 211 entries, external-gitcode-ascend-tunnel to ezrouter
+- [f-001](f-001.md): 833 entries, f to familienakte-ordnen-und-belege-anfordern
+- [f-002](f-002.md): 875 entries, familienangehoerige to fec-alchemy
+- [f-003](f-003.md): 854 entries, fec-alchemy to figma
+- [f-004](f-004.md): 820 entries, figma to find-keywords
+- [f-005](f-005.md): 860 entries, find-law-firm to fix-deprecated-controls
+- [f-006](f-006.md): 880 entries, fix-docker-image-org-mismatch to flutter-animation
+- [f-007](f-007.md): 902 entries, flutter-animations to formatting
+- [f-008](f-008.md): 873 entries, formatting-and-highlighting to fresh-eyes-review
+- [f-009](f-009.md): 874 entries, fresh-pr to fund-advisor
+- [f-010](f-010.md): 226 entries, fund-agent-wallet to fzulg-fristen-form-und-zustaendigkeit
+- [g-001](g-001.md): 846 entries, g to gdpr-data-residency-checks
+- [g-002](g-002.md): 870 entries, gdpr-doc-review to generating-synthea-data
+- [g-003](g-003.md): 924 entries, generating-synthetic-surrogates to gh-repo-create
+- [g-004](g-004.md): 969 entries, gh-review-requests to github-issue-dedupe
+- [g-005](g-005.md): 955 entries, github-issue-fetcher to gmbh-tatbestand-beweis-und-belege
+- [g-006](g-006.md): 874 entries, gmbh-und-co-kg-hgb to google-ads-write
+- [g-007](g-007.md): 837 entries, google-adsense to granola-data-handling
+- [g-008](g-008.md): 913 entries, granola-debug-bundle to groove-work-spec
+- [g-009](g-009.md): 940 entries, groq to gws
+- [g-010](g-010.md): 83 entries, gws-admin to gzip-index-structure-parsing
+- [h-001](h-001.md): 894 entries, h to harness:status
+- [h-002](h-002.md): 921 entries, harness_portability to hex-init
+- [h-003](h-003.md): 844 entries, hex-install-auth to holohub-module-lifecycle
+- [h-004](h-004.md): 865 entries, holoscan-install-conda to html-prototype-build
+- [h-005](h-005.md): 813 entries, html-report to hunting-for-startup-folder-persistence
+- [h-006](h-006.md): 381 entries, hunting-for-startup-folder-persistence to hzl
+- [i-001](i-001.md): 798 entries, i to ideogram-ci-integration
+- [i-002](i-002.md): 819 entries, ideogram-common-errors to immunity
+- [i-003](i-003.md): 795 entries, immutable-infrastructure-for-trading-bots to implementing-web-application-logging-with-modsecu…
+- [i-004](i-004.md): 820 entries, implementing-web-application-logging-with-modsecu… to infl-013-musik-im-reel-urheberrecht-plattformlize…
+- [i-005](i-005.md): 893 entries, infl-014-bildrechte-kug-beiwerk-oeffentlichkeit to inso-verteidigung-anfechtungsgegner
+- [i-006](i-006.md): 864 entries, inso-verteidigung-vorsatzanfechtung to interaction-motion-design
+- [i-007](i-007.md): 883 entries, interaction-nets to investigating-a-codebase
+- [i-008](i-008.md): 840 entries, investigating-agentforce-architecture to isotopic-peak-removal
+- [i-009](i-009.md): 432 entries, isotopic-signature-clustering-and-grouping to iwsdk-ui-panel
+- [j-001](j-001.md): 777 entries, j to jep-exhibits-for-general-readers
+- [j-002](j-002.md): 792 entries, jep-jeanne-sulzer to jop-tables-figures
+- [j-003](j-003.md): 814 entries, jop-theory-building to juristischer-argumentationskern
+- [j-004](j-004.md): 208 entries, juristischer-argumentationskern to jwx-guide-v4
+- [k-001](k-001.md): 871 entries, k to keda-configuration-validation
+- [k-002](k-002.md): 916 entries, keda-event-driven-autoscaling-configuration to kling-v3-pro-image-to-video
+- [k-003](k-003.md): 936 entries, kling-v3-pro-motion-control to krankenkassen-krankengeld-44-sgb-v
+- [k-004](k-004.md): 561 entries, krankenkassen-leistungsablehnung-sgb-v to kz-tax-optimization
+- [l-001](l-001.md): 877 entries, l to large-file-kpi-analysis
+- [l-002](l-002.md): 830 entries, large-file-parquet-analysis-and-highlight to learn
+- [l-003](l-003.md): 853 entries, learn to lhb-analyzer
+- [l-004](l-004.md): 815 entries, lhon-research to linktree-security-basics
+- [l-005](l-005.md): 864 entries, linktree-upgrade-migration to llm-gateway-and-multi-provider-routing
+- [l-006](l-006.md): 922 entries, llm-gold-bound-failure-check to lokalise-prod-checklist
+- [l-007](l-007.md): 788 entries, lokalise-rate-limits to lt-ios-launch
+- [l-008](l-008.md): 428 entries, lt-sprint-orchestrator to lyt-video-script
+- [m-001](m-001.md): 851 entries, m to makler-abgrenzung
+- [m-002](m-002.md): 829 entries, makler-courtage-mietrecht to maple
+- [m-003](m-003.md): 762 entries, maplestory-skill-maker to markstream-vue2-vite
+- [m-004](m-004.md): 813 entries, markt-mehrparteien-konflikt-und-interessen to matlab-import-driving-data
+- [m-005](m-005.md): 838 entries, matlab-import-export-data to mdp-hire-a-ai
+- [m-006](m-006.md): 823 entries, mdpr-skill to memory
+- [m-007](m-007.md): 898 entries, memory to meta-ads-manager
+- [m-008](m-008.md): 816 entries, meta-ads-spain to mexico-einvoice
+- [m-009](m-009.md): 786 entries, mexico-iva to mimo-code
+- [m-010](m-010.md): 849 entries, mimo-v2-5-tts to ml-supply-chain
+- [m-011](m-011.md): 887 entries, ml-system-design-interview to modeling-warehouse-foundations
+- [m-012](m-012.md): 882 entries, modeller-predict to month-end-close
+- [m-013](m-013.md): 856 entries, month-end-close to muendliche-anhoerung-vorbereitung
+- [m-014](m-014.md): 851 entries, muendliche-atmosphaere-druck to mysql-to-mariadb
+- [m-015](m-015.md): 58 entries, mysql-tuner to möbius-path-filtering
+- [n-001](n-001.md): 855 entries, n to nature-reviews-earth-and-environment
+- [n-002](n-002.md): 845 entries, nature-reviews-materials to net-f314dd0d
+- [n-003](n-003.md): 852 entries, net-f332b629 to Next.js Testing Patterns
+- [n-004](n-004.md): 883 entries, next.js-security-scan to nopeek
+- [n-005](n-005.md): 889 entries, nopua to nuvemshop-webhooks
+- [n-006](n-006.md): 382 entries, nuwa-world-api to nzx
+- [o-001](o-001.md): 855 entries, o to offensive-jwt
+- [o-002](o-002.md): 813 entries, offensive-jwt to Omnisend Automation
+- [o-003](o-003.md): 862 entries, omnisocials to openakita/skills@mcp-installer
+- [o-004](o-004.md): 931 entries, openakita/skills@miaoda-app-builder to opentradex-scan
+- [o-005](o-005.md): 882 entries, opentradex-sell to orcaflex-results-comparison-basic-comparison
+- [o-006](o-006.md): 859 entries, orcaflex-results-comparison-comparison-bar-chart to OSTRTA: One Skill To Rule Them All
+- [o-007](o-007.md): 748 entries, osv-scanner to oz_platform
+- [p-001](p-001.md): 846 entries, p to paragraf-18-gwb-pruefung
+- [p-002](p-002.md): 910 entries, paragraf-203-stgb-berufsgeheimnis to payment-provider-framework
+- [p-003](p-003.md): 918 entries, payment-provider-protocol to performance-analyzer
+- [p-004](p-004.md): 812 entries, performance-analyzer-sms to persona-architecture
+- [p-005](p-005.md): 886 entries, persona-author to phyllotaxis
+- [p-006](p-006.md): 879 entries, phylogenetic-operad-acset to plan
+- [p-007](p-007.md): 830 entries, plan to play-store-screenshots
+- [p-008](p-008.md): 878 entries, play-store-upload to podcast-to-radio-adapter
+- [p-009](p-009.md): 838 entries, podcast-transcript-fetcher to post-quantum-crypto-poc
+- [p-010](p-010.md): 871 entries, post-release to pr-quality-analyst
+- [p-011](p-011.md): 864 entries, pr-quality-architect to preserve-error-source
+- [p-012](p-012.md): 858 entries, preserve-materials to procore-observability
+- [p-013](p-013.md): 844 entries, procore-performance-tuning to progressive-web-app
+- [p-014](p-014.md): 882 entries, progressive-web-app to proposal-development
+- [p-015](p-015.md): 861 entries, proposal-drafter to publication-figure-preparation
+- [p-016](p-016.md): 895 entries, publication-figures to python-live-release-control
+- [p-017](p-017.md): 304 entries, python-live-rollback-and-recovery to PZ Verify Live
+- [q-001](q-001.md): 864 entries, q to quality-management
+- [q-002](q-002.md): 676 entries, quality-manager-qmr to qzcli
+- [r-001](r-001.md): 960 entries, r to rds-db2
+- [r-002](r-002.md): 891 entries, rds-instance-setup to rebase
+- [r-003](r-003.md): 907 entries, rebase to red-team-shop-vor-launch
+- [r-004](r-004.md): 879 entries, red-team-tactics to registry-search
+- [r-005](r-005.md): 943 entries, regle to remember-email
+- [r-006](r-006.md): 869 entries, remember-finances to reportlab
+- [r-007](r-007.md): 862 entries, reports to reskilling-pathway-mapper
+- [r-008](r-008.md): 874 entries, reskin to retrospect
+- [r-009](r-009.md): 909 entries, retrospect to review-pr
+- [r-010](r-010.md): 831 entries, review-pr to risk-register-builder
+- [r-011](r-011.md): 900 entries, risk-register-cyber to rseng-debugging
+- [r-012](r-012.md): 876 entries, rseng-defensive-coding to runway-dev-recipes
+- [r-013](r-013.md): 240 entries, runway-dev-workflows to ryot
+- [s-001](s-001.md): 795 entries, s to salesforce-core-workflow-b
+- [s-002](s-002.md): 806 entries, salesforce-cost-tuning to sc4sap:compare-programs
+- [s-003](s-003.md): 865 entries, sc4sap:create-object to schutz-missbrauch-seelsorgegesprach
+- [s-004](s-004.md): 866 entries, schutz-missbrauch-und-meldepflichten to sdm
+- [s-005](s-005.md): 868 entries, sdpm-spec to security-detection
+- [s-006](s-006.md): 895 entries, security-detection-rule-management to semantic-guard-analysis
+- [s-007](s-007.md): 853 entries, semantic-html-and-seo to seo-optimization
+- [s-008](s-008.md): 834 entries, seo-optimization to setting-up-cloudwatch-alarm-notifications
+- [s-009](s-009.md): 852 entries, setting-up-coral to sfnext-components
+- [s-010](s-010.md): 898 entries, sfnext-configuration to shopify-multi-env-setup
+- [s-011](s-011.md): 825 entries, shopify-observability to single-cell-chromatin-data-handling
+- [s-012](s-012.md): 908 entries, single-cell-chromatin-sample-filtering to skill-pilot-webui
+- [s-013](s-013.md): 937 entries, skill-pipeline to smart-contract-audit-requirements-before-defi-int…
+- [s-014](s-014.md): 816 entries, smart-contract-auditing to soft-screening-startup
+- [s-015](s-015.md): 910 entries, soft-skills-scenario-video to spacing-system
+- [s-016](s-016.md): 902 entries, spacious to spectral-feature-table-generation
+- [s-017](s-017.md): 855 entries, spectral-feature-vector-aggregation to spring-boot-dependency-injection
+- [s-018](s-018.md): 891 entries, spring-boot-deployment to stale-work-loop
+- [s-019](s-019.md): 940 entries, stale-worktree-cleanup to steuererklaerung-ohne-vollstaendige-belege-organi
+- [s-020](s-020.md): 860 entries, steuererklaerung-ohne-vollstaendige-belege-rechts… to strassenverkehr-mandantenbrief-schreiben
+- [s-021](s-021.md): 869 entries, strassenverkehr-rechtsbeschwerde to submit-pr
+- [s-022](s-022.md): 805 entries, submit-program to susa-formfehler-pruefen
+- [s-023](s-023.md): 862 entries, susa-haupt-und-personenkonten to syncfusion-react-dropdown-tree
+- [s-024](s-024.md): 398 entries, syncfusion-react-dropdowns to szenario-mandatsuebernahme
+- [t-001](t-001.md): 820 entries, t to task-bulk-ops
+- [t-002](t-002.md): 895 entries, task-capture-achievement to teach
+- [t-003](t-003.md): 925 entries, teach-back-evaluator to telnyx-porting-in-java
+- [t-004](t-004.md): 962 entries, telnyx-porting-in-javascript to test-generator
+- [t-005](t-005.md): 936 entries, test-generator to thai-invoice
+- [t-006](t-006.md): 840 entries, thai-market-sizing to tieba
+- [t-007](t-007.md): 875 entries, tier-modes to token-sheet-builder
+- [t-008](t-008.md): 817 entries, token-shunt-honesty-not-clone to trademe-nz
+- [t-009](t-009.md): 840 entries, tradeoff-analysis to triage-notaufnahme-vergaberecht-krankenhaus
+- [t-010](t-010.md): 838 entries, triage-orange-checks to tx-draft-order
+- [t-011](t-011.md): 323 entries, tx-experiment to tzst
+- [u-001](u-001.md): 853 entries, u to uml-mcp-diagrams
+- [u-002](u-002.md): 895 entries, umlageschluessel to untersuchungsplan
+- [u-003](u-003.md): 874 entries, untervermietung to user-flow
+- [u-004](u-004.md): 742 entries, user-flow-designer to uzi-skill-stock-analyzer
+- [v-001](v-001.md): 896 entries, v to veo3-1-first-last-frame-to-video-fast
+- [v-002](v-002.md): 932 entries, veo3-1-image-to-video to verordnungsermaechtigung-art80
+- [v-003](v-003.md): 845 entries, verotusmenettely-ja-muutoksenhaku to video-understand
+- [v-004](v-004.md): 855 entries, video-understanding to volcano-plot-interpretation-cancer-benign
+- [v-005](v-005.md): 497 entries, volcano-plot-labeler to vzta-antrag-warennummer-hs-wto-handelspolitik
+- [w-001](w-001.md): 863 entries, w to web-maps-mapbox
+- [w-002](w-002.md): 887 entries, web-media-getter to weights-and-biases
+- [w-003](w-003.md): 873 entries, weights-and-biases to winui-ui-testing
+- [w-004](w-004.md): 884 entries, winui-wpf-migration to workflow-improvement
+- [w-005](w-005.md): 922 entries, workflow-indexmiete-staffelmiete to wp-playground-development
+- [w-006](w-006.md): 871 entries, wp-plugin-development to writing-wayfinder-scripts
+- [w-007](w-007.md): 89 entries, writing-web to WYRE MCP Gateway Troubleshooting
+- [x-001](x-001.md): 624 entries, x to xyz-hypothesis
+- [y-001](y-001.md): 535 entries, y to yyl-video-thumbnail
+- [z-001](z-001.md): 775 entries, z to zzzprobe

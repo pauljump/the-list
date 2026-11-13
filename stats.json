@@ -1,0 +1,83 @@
+{
+ "crawl": "2026-09-19 to 2026-11-13",
+ "read": "2026-11-13",
+ "queue": {
+  "error": 19,
+  "missing": 2689,
+  "ok": 327186,
+  "pending": 819104
+ },
+ "plugins": {
+  "entries": 95262,
+  "pages": 86,
+  "csv": [
+   "plugins.csv"
+  ],
+  "rows": 113187,
+  "described": 81179,
+  "gone": 999
+ },
+ "skills": {
+  "entries": 200896,
+  "pages": 247,
+  "csv": [
+   "skills-1.csv",
+   "skills-2.csv",
+   "skills-3.csv"
+  ],
+  "files": 1017447,
+  "unique": 690088,
+  "read": 214951,
+  "described": 200697
+ },
+ "agents": {
+  "entries": 27720,
+  "pages": 45,
+  "csv": [
+   "agents.csv"
+  ],
+  "files": 192389,
+  "unique": 143960,
+  "read": 32106,
+  "described": 27649
+ },
+ "commands": {
+  "entries": 31026,
+  "pages": 35,
+  "csv": [
+   "commands.csv"
+  ],
+  "files": 193042,
+  "unique": 136636,
+  "read": 33488,
+  "described": 30942
+ },
+ "mcp-servers": {
+  "entries": 2586,
+  "pages": 27,
+  "csv": [
+   "mcp-servers.csv"
+  ],
+  "files": 4414
+ },
+ "hooks": {
+  "entries": 6849,
+  "pages": 27,
+  "csv": [
+   "hooks.csv"
+  ],
+  "files": 10286
+ },
+ "repos": {
+  "entries": 54326,
+  "seen": 129544,
+  "by_status": {
+   "treed": 56945,
+   "gone": 11319,
+   "done": 45,
+   "new": 2787,
+   "empty": 1,
+   "resolved": 58447
+  }
+ }
+}
