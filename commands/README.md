@@ -1,102 +1,122 @@
 # Commands
 
-96,496 slash commands: every distinct `commands/*.md` the crawl could read.
+130,136 slash commands: every distinct `commands/*.md` the crawl could read.
 
 ## Get it
 
-- [`commands.csv`](commands.csv) (28 MB)
+- [`commands.csv`](commands.csv) (38 MB)
 
 Columns: `name`, `description`, `repo`, `url`, `stars`, `license`, `last_pushed`, `copies`, `argument_hint`, `allowed_tools`, `model`.
 
 ## Notes
 
-- The crawl found 231,604 of these files across all repos; 158,534 are distinct. The text of 105,385 was read; 53,149 could not be (too large, binary, or gone from GitHub).
+- The crawl found 244,879 of these files across all repos; 167,277 are distinct. The text of 141,963 was read; 25,314 could not be (too large, binary, or gone from GitHub).
 - Entries with the same name and description are one entry, shown at the most-starred repo that is not a fork. `copies` is how many copies of the file the crawl found across GitHub.
-- 96,200 have a description: the file's own `description`, or its first paragraph when it has none. Cut at 600 characters.
+- 129,714 have a description: the file's own `description`, or its first paragraph when it has none. Cut at 600 characters.
 - `stars`, `license` and `last_pushed` belong to the repo.
 - `name` is the file name, which is what you type after the slash.
 
 ## Browse
 
-- [0-9-001](0-9-001.md): 447 entries, # AgentPane Phase 1: Foundation Layer to 프로젝트시작
-- [a-001](a-001.md): 1,426 entries, a to adosync
-- [a-002](a-002.md): 1,430 entries, adotar to al_run_slam_pipeline
-- [a-003](a-003.md): 1,416 entries, al_sensitivity_mapping to apollo-check
-- [a-004](a-004.md): 1,402 entries, apollo-migrate to assess
-- [a-005](a-005.md): 1,349 entries, assess to auto-commit-push
-- [a-006](a-006.md): 548 entries, auto-continue to azure-tenant-setup
-- [b-001](b-001.md): 1,452 entries, b to boss-profile
-- [b-002](b-002.md): 1,450 entries, boss:extend to build-forecast
-- [b-003](b-003.md): 471 entries, build-forecast to bzpopmin
-- [c-001](c-001.md): 1,638 entries, c to cc-implement
-- [c-002](c-002.md): 1,546 entries, cc-init to choose
-- [c-003](c-003.md): 1,454 entries, choose-cv-approach to cobranca-indevida
-- [c-004](c-004.md): 1,460 entries, cobrapy to commit-message
-- [c-005](c-005.md): 1,430 entries, commit-message to consult
-- [c-006](c-006.md): 1,458 entries, consult to coverage-report
-- [c-007](c-007.md): 1,381 entries, coverage-report to crib
-- [c-008](c-008.md): 931 entries, crime-report to cypher
-- [d-001](d-001.md): 1,473 entries, d to deep-lit-tick
-- [d-002](d-002.md): 1,416 entries, deep-model-benchmark to design-iac
-- [d-003](d-003.md): 1,394 entries, design-iac-structure to discover
-- [d-004](d-004.md): 1,437 entries, discover to dokploy-troubleshoot
-- [d-005](d-005.md): 704 entries, domain to dyno-plan
-- [e-001](e-001.md): 1,450 entries, e to eval-calibrate
-- [e-002](e-002.md): 1,414 entries, eval-changed to eye-health
-- [f-001](f-001.md): 1,424 entries, f to fix
-- [f-002](f-002.md): 1,530 entries, fix to framework-doctor
-- [f-003](f-003.md): 480 entries, framework-feedback to fyi
-- [g-001](g-001.md): 1,426 entries, g to gh-issue
-- [g-002](g-002.md): 1,430 entries, gh-issue to gstack-design-consultation
-- [g-003](g-003.md): 325 entries, gstack-design-review to gz:prd
-- [h-001](h-001.md): 1,489 entries, h to history
-- [h-002](h-002.md): 697 entries, history to hypothesize
-- [i-001](i-001.md): 1,418 entries, i-audit to indexer-health
-- [i-002](i-002.md): 1,451 entries, indexes to intake
-- [i-003](i-003.md): 871 entries, intake to izanagi
-- [j-001](j-001.md): 551 entries, j to jx
-- [k-001](k-001.md): 759 entries, k-exaone to kztek-brand-info
-- [l-001](l-001.md): 1,482 entries, l-debug-trace to lisa:migrate
-- [l-002](l-002.md): 1,282 entries, lisa:monitor to lyrics
-- [m-001](m-001.md): 1,412 entries, m to memory-help
-- [m-002](m-002.md): 1,420 entries, memory-history to model-3d
-- [m-003](m-003.md): 1,060 entries, model-audit to myunsw
-- [n-001](n-001.md): 1,514 entries, n+1 to npm-install
-- [n-002](n-002.md): 179 entries, npm-install-ci-test to nz-business-english
-- [o-001](o-001.md): 1,446 entries, o2-status to oracle
-- [o-002](o-002.md): 581 entries, oracle to oxytocin
-- [p-001](p-001.md): 1,421 entries, p to pipeline
-- [p-002](p-002.md): 1,464 entries, pipeline to platform-status
-- [p-003](p-003.md): 1,482 entries, platform-sync to PRD.template
-- [p-004](p-004.md): 1,418 entries, prd2plan to promises
-- [p-005](p-005.md): 1,155 entries, promo to pz-server-tool
-- [q-001](q-001.md): 819 entries, q-analyze to qwik-expert
-- [r-001](r-001.md): 1,453 entries, r to recce-check
-- [r-002](r-002.md): 1,448 entries, recce-ci to release
-- [r-003](r-003.md): 1,454 entries, release to research-ai-citations
-- [r-004](r-004.md): 1,503 entries, research-analyze to review
-- [r-005](r-005.md): 1,440 entries, review to review-well-architected
-- [r-006](r-006.md): 1,453 entries, review-well-architected to run-tests
-- [r-007](r-007.md): 192 entries, run-tests to rvf
-- [s-001](s-001.md): 1,425 entries, s to screenshot
-- [s-002](s-002.md): 1,406 entries, screenshot to semantic-commit
-- [s-003](s-003.md): 1,532 entries, semantic-commit to setup-awow
-- [s-004](s-004.md): 1,423 entries, setup-awow to skill-agent-pipeline
-- [s-005](s-005.md): 1,422 entries, skill-api-contract-test to spec-from-stories
-- [s-006](s-006.md): 1,389 entries, spec-from-track to stage5-validate
-- [s-007](s-007.md): 1,596 entries, stage6-report to status
-- [s-008](s-008.md): 1,466 entries, status to sync
-- [s-009](s-009.md): 616 entries, sync to szukaj
-- [t-001](t-001.md): 1,464 entries, t32 to test
-- [t-002](t-002.md): 1,522 entries, test to tma1-peer
-- [t-003](t-003.md): 1,454 entries, tma1-search to tune-hyperparameters
-- [t-004](t-004.md): 153 entries, tune-marketing to tz
-- [u-001](u-001.md): 1,465 entries, UA Analyze to upgrade
-- [u-002](u-002.md): 473 entries, upgrade to uxdoc
-- [v-001](v-001.md): 1,472 entries, v to vet
-- [v-002](v-002.md): 582 entries, vet to vyroscan-audit
-- [w-001](w-001.md): 1,464 entries, w to workout
-- [w-002](w-002.md): 936 entries, workout to www-update
-- [x-001](x-001.md): 97 entries, x to xyz
-- [y-001](y-001.md): 105 entries, y-govern to yuri-zenkai
-- [z-001](z-001.md): 128 entries, z-audit to zzzprobe
+- [0-9-001](0-9-001.md): 729 entries, # AgentPane Phase 1: Foundation Layer to 프로젝트시작
+- [a-001](a-001.md): 1,481 entries, a to add-test
+- [a-002](a-002.md): 1,411 entries, add-test to agent-oracle-codex
+- [a-003](a-003.md): 1,410 entries, agent-oracle-gemini to analysis
+- [a-004](a-004.md): 1,454 entries, analysis to apply
+- [a-005](a-005.md): 1,422 entries, apply to ask
+- [a-006](a-006.md): 1,428 entries, ask to audit-formalisation
+- [a-007](a-007.md): 1,353 entries, audit-freshness to azure-tenant-setup
+- [b-001](b-001.md): 1,502 entries, b to blueprint-optimize
+- [b-002](b-002.md): 1,417 entries, blueprint-plan to broken-ref
+- [b-003](b-003.md): 1,473 entries, broker to builder-write-test
+- [b-004](b-004.md): 297 entries, buildforce.build to bzpopmin
+- [c-001](c-001.md): 1,651 entries, c to carve-codesight
+- [c-002](c-002.md): 1,604 entries, carve-commit to check-architecture
+- [c-003](c-003.md): 1,522 entries, check-architecture to claim
+- [c-004](c-004.md): 1,458 entries, claim to coach
+- [c-005](c-005.md): 1,411 entries, coach to commit
+- [c-006](c-006.md): 1,541 entries, commit to component
+- [c-007](c-007.md): 1,439 entries, component to context-refresh
+- [c-008](c-008.md): 1,449 entries, context-refresh to cowork-add
+- [c-009](c-009.md): 1,424 entries, cowork-add-area to create-skill-parent
+- [c-010](c-010.md): 1,309 entries, create-skills-via-llms to curate-questions
+- [c-011](c-011.md): 276 entries, curate-recall to cypher
+- [d-001](d-001.md): 1,517 entries, d to debug-session
+- [d-002](d-002.md): 1,490 entries, debug-session to deploy-checklist
+- [d-003](d-003.md): 1,348 entries, deploy-checklist to destroy
+- [d-004](d-004.md): 1,485 entries, destroy to discover-profiles
+- [d-005](d-005.md): 1,444 entries, discover-project-semantics to doctor
+- [d-006](d-006.md): 1,413 entries, doctor to dw-flow
+- [d-007](d-007.md): 197 entries, dw-functional-doc to dz-verify-step
+- [e-001](e-001.md): 1,478 entries, e to epic-swarm
+- [e-002](e-002.md): 1,454 entries, epic-sync to experiment-design
+- [e-003](e-003.md): 885 entries, experiment-formalisation to eye-health
+- [f-001](f-001.md): 1,431 entries, f to find
+- [f-002](f-002.md): 1,525 entries, find to flow-metrics
+- [f-003](f-003.md): 1,525 entries, flow-migrate to functional
+- [f-004](f-004.md): 123 entries, functional-fatigue-budget to fzf-theme
+- [g-001](g-001.md): 1,419 entries, g to generate-sns-profile
+- [g-002](g-002.md): 1,494 entries, generate-social to goal-setting
+- [g-003](g-003.md): 1,331 entries, goal-spec-tasks to gz:wf
+- [h-001](h-001.md): 1,483 entries, h to help
+- [h-002](h-002.md): 1,419 entries, help to hyrex-swarm
+- [i-001](i-001.md): 1,423 entries, i-audit to improve-codebase-architecture
+- [i-002](i-002.md): 1,487 entries, improve-codebase-architecture to init-mcp
+- [i-003](i-003.md): 1,448 entries, init-mcp-server to inversion
+- [i-004](i-004.md): 648 entries, inversion-dtd to izap-mcp-client
+- [j-001](j-001.md): 733 entries, j to jyl-usage
+- [k-001](k-001.md): 1,069 entries, k-exaone to kztek-brand-info
+- [l-001](l-001.md): 1,467 entries, l to linear-my-issues
+- [l-002](l-002.md): 1,504 entries, linear-new to login
+- [l-003](l-003.md): 699 entries, login to lyrics
+- [m-001](m-001.md): 1,421 entries, m to mediavortex-analyze-transcode
+- [m-002](m-002.md): 1,444 entries, mediavortex-check-baselines to migrate
+- [m-003](m-003.md): 1,389 entries, migrate to monodesign-craft
+- [m-004](m-004.md): 871 entries, monodesign-critique to myunsw
+- [n-001](n-001.md): 1,517 entries, n to nextjs-fix
+- [n-002](n-002.md): 909 entries, nextjs-init to nz-business-english
+- [o-001](o-001.md): 1,490 entries, o2-status to openui-install
+- [o-002](o-002.md): 1,263 entries, openui-integrate to oxytocin
+- [p-001](p-001.md): 1,424 entries, p to personas
+- [p-002](p-002.md): 1,526 entries, personas to plan
+- [p-003](p-003.md): 1,453 entries, plan to polish
+- [p-004](p-004.md): 1,487 entries, polish to prd-to-issues
+- [p-005](p-005.md): 1,414 entries, prd-to-json to progress
+- [p-006](p-006.md): 1,377 entries, progress to psm
+- [p-007](p-007.md): 677 entries, psm to pz-server-tool
+- [q-001](q-001.md): 1,146 entries, q to qwik-expert
+- [r-001](r-001.md): 1,441 entries, r to ready-check
+- [r-002](r-002.md): 1,484 entries, ready-for-main to refine
+- [r-003](r-003.md): 1,464 entries, refine to remove
+- [r-004](r-004.md): 1,447 entries, remove to research-lib
+- [r-005](r-005.md): 1,516 entries, research-library to review
+- [r-006](r-006.md): 1,565 entries, review to review-community
+- [r-007](r-007.md): 1,392 entries, review-community-health to risk-assessment
+- [r-008](r-008.md): 1,479 entries, risk-assessment to run-quarterly-cycle
+- [r-009](r-009.md): 375 entries, run-quarterly-planning to rx-report
+- [s-001](s-001.md): 1,455 entries, s to scene
+- [s-002](s-002.md): 1,461 entries, scene to seclabel.h
+- [s-003](s-003.md): 1,420 entries, second-brain to service-health-watchlist
+- [s-004](s-004.md): 1,565 entries, service-inventory to setup
+- [s-005](s-005.md): 1,439 entries, setup to shotgun
+- [s-006](s-006.md): 1,447 entries, should-i-start-fresh to smith:tax
+- [s-007](s-007.md): 1,417 entries, smm to specify
+- [s-008](s-008.md): 1,419 entries, specify to stack
+- [s-009](s-009.md): 1,524 entries, stack to status
+- [s-010](s-010.md): 1,671 entries, status to stripe-test
+- [s-011](s-011.md): 1,470 entries, strix-apply to sync-check
+- [s-012](s-012.md): 546 entries, sync-check to szukaj
+- [t-001](t-001.md): 1,485 entries, t to tech-writer
+- [t-002](t-002.md): 1,589 entries, tech-writer to testarch-ci
+- [t-003](t-003.md): 1,469 entries, testarch-ci to trace
+- [t-004](t-004.md): 1,443 entries, trace to tz
+- [u-001](u-001.md): 1,462 entries, UA Analyze to update-epic
+- [u-002](u-002.md): 1,077 entries, update-epic to uzman-guncelle
+- [v-001](v-001.md): 1,512 entries, v to verify
+- [v-002](v-002.md): 1,241 entries, verify to vyroscan-audit
+- [w-001](w-001.md): 1,469 entries, w to wip
+- [w-002](w-002.md): 1,383 entries, wip to write-plan
+- [w-003](w-003.md): 359 entries, write-plan to wyatt
+- [x-001](x-001.md): 141 entries, x to xyz
+- [y-001](y-001.md): 145 entries, y-govern to yuri-zenkai
+- [z-001](z-001.md): 156 entries, z-audit to zzzprobe
