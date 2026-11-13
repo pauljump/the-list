@@ -1,6 +1,6 @@
 # Agents
 
-171,807 subagents: every distinct `agents/*.md` the crawl could read, with what it is for.
+173,382 subagents: every distinct `agents/*.md` the crawl could read, with what it is for.
 
 ## Get it
 
@@ -11,206 +11,209 @@ Columns: `name`, `description`, `repo`, `url`, `stars`, `license`, `last_pushed`
 
 ## Notes
 
-- The crawl found 297,874 of these files across all repos; 210,119 are distinct. The text of 204,191 was read; 5,928 could not be (too large, binary, or gone from GitHub).
+- The crawl found 300,619 of these files across all repos; 212,078 are distinct. The text of 206,286 was read; 5,792 could not be (too large, binary, or gone from GitHub).
 - Entries with the same name and description are one entry, shown at the most-starred repo that is not a fork. `copies` is how many copies of the file the crawl found across GitHub.
-- 170,676 have a description: the file's own `description`, or its first paragraph when it has none. Cut at 600 characters.
+- 172,232 have a description: the file's own `description`, or its first paragraph when it has none. Cut at 600 characters.
 - `stars`, `license` and `last_pushed` belong to the repo.
 - Any Markdown file in an `agents/` folder counts, so agents written for Copilot, Codex and others are included.
 
 ## Browse
 
-- [0-9-001](0-9-001.md): 1,106 entries, $(echo $agent | sed 's/-/ /g' | sed 's/\b\(.\)/\u… to 20260608T165156Z-agent-report-feat123-slice53
-- [0-9-002](0-9-002.md): 864 entries, 20260608T213438Z-agent-report-feat029-slice54 to 🧪 tester
-- [a-001](a-001.md): 904 entries, a to accessibility-specialist
-- [a-002](a-002.md): 919 entries, accessibility-specialist to adversarial-orchestrator
-- [a-003](a-003.md): 917 entries, adversarial-pair to Agent Governance Reviewer
-- [a-004](a-004.md): 984 entries, Agent L - LSP Validator to AGENT_GUIDE
-- [a-005](a-005.md): 1,029 entries, AGENT_HARDENING_12_PHASE_COMPLETION to ai-engineer-expert
-- [a-006](a-006.md): 929 entries, ai-engineer.agent to alt-text-generator
-- [a-007](a-007.md): 926 entries, alt-text-headings to android-navigation-deeplinks
-- [a-008](a-008.md): 935 entries, android-networking-retrofit-okhttp to api-deprecation-and-pep7
-- [a-009](a-009.md): 902 entries, api-deprecation-tracker to approval-verifier
-- [a-010](a-010.md): 993 entries, approval-workflow-manager to architect
-- [a-011](a-011.md): 1,015 entries, architect to architecture-advisor
-- [a-012](a-012.md): 859 entries, architecture-advisor to aris-reviewer-claude.agent
-- [a-013](a-013.md): 884 entries, aris-reviewer-openai.agent to astro-expert
-- [a-014](a-014.md): 934 entries, astro-expert to auditor-seguranca
-- [a-015](a-015.md): 884 entries, auditor-seguranca to azurelocal.github.io-engineer
-- [b-001](b-001.md): 953 entries, b to backend-fastapi-specialist
-- [b-002](b-002.md): 904 entries, backend-feature to beacon-auditor
-- [b-003](b-003.md): 933 entries, beacon-docs-reviewer to blog-meta-generator
-- [b-004](b-004.md): 988 entries, blog-meta-generator to branch-cleaner
-- [b-005](b-005.md): 919 entries, branch-code-simplifier to bug-hunter
-- [b-006](b-006.md): 1,038 entries, bug-hunter to bulk-reader
-- [b-007](b-007.md): 428 entries, bulk-reader to B站内容策略师
-- [c-001](c-001.md): 931 entries, C# Code Reviewer to CAST Imaging Structural Quality Advisor Agent
-- [c-002](c-002.md): 958 entries, cast-cue-linter to channels-engineer
-- [c-003](c-003.md): 943 entries, channels-integrations to ci-observer
-- [c-004](c-004.md): 945 entries, ci-orchestration-spec to claude-history
-- [c-005](c-005.md): 887 entries, claude-hook-developer to cloud_architect
-- [c-006](c-006.md): 943 entries, cloudbase-architect to code-honesty-auditor
-- [c-007](c-007.md): 888 entries, code-humanizer to code-reviewer
-- [c-008](c-008.md): 1,002 entries, code-reviewer to code-reviewer
-- [c-009](c-009.md): 1,039 entries, code-reviewer to code-reviewer
-- [c-010](c-010.md): 926 entries, code-reviewer to codebase-mapper
-- [c-011](c-011.md): 960 entries, codebase-mapper to codex-wrapper-async
-- [c-012](c-012.md): 941 entries, codex-wrapper-repair to comms-scanner
-- [c-013](c-013.md): 962 entries, comms-summarizer to ComponentReviewer
-- [c-014](c-014.md): 907 entries, components to consultant
-- [c-015](c-015.md): 945 entries, consultant to context-reconciler
-- [c-016](c-016.md): 930 entries, context-recovery to copilot-judge
-- [c-017](c-017.md): 922 entries, copilot-measure-parity-implementer to coverage-rescuer
-- [c-018](c-018.md): 974 entries, coverage-review-agent to critic-minority
-- [c-019](c-019.md): 932 entries, critic-operability to css-in-js-architect
-- [c-020](c-020.md): 659 entries, css-layer-reviewer to CzechLawAdvisor
-- [d-001](d-001.md): 941 entries, d-coping-editor to data-ml
-- [d-002](d-002.md): 932 entries, data-ml-pipeline-swarm to dataeng-architecture-agent
-- [d-003](d-003.md): 932 entries, dataeng-discovery-agent to debug-hunter
-- [d-004](d-004.md): 1,004 entries, debug-implementer to deep-research
-- [d-005](d-005.md): 944 entries, deep-research to deploy
-- [d-006](d-006.md): 898 entries, deploy to design-handoff-builder
-- [d-007](d-007.md): 910 entries, design-handoff-writer to designer-agent
-- [d-008](d-008.md): 982 entries, designer-agent to developer-relations
-- [d-009](d-009.md): 955 entries, developer-reviewer to devops-orchestrator
-- [d-010](d-010.md): 921 entries, devops-orchestrator-agent to dispatch
-- [d-011](d-011.md): 972 entries, dispatch to doc-updater
-- [d-012](d-012.md): 962 entries, doc-updater to docs-registrar
-- [d-013](d-013.md): 923 entries, docs-release to documentation-sync
-- [d-014](d-014.md): 1,019 entries, documentation-sync-agent to dotnet-performance-analyst
-- [d-015](d-015.md): 831 entries, dotnet-performance-analyst to dyspraxia-advocate
-- [e-001](e-001.md): 942 entries, E-Commerce Catalog Designer to eic_agent
-- [e-002](e-002.md): 912 entries, eic_agent to engineering-evolution-2026
-- [e-003](e-003.md): 927 entries, engineering-feishu-integration-developer to ethics-checker
-- [e-004](e-004.md): 977 entries, ethics-orchestrator to excel-agent
-- [e-005](e-005.md): 973 entries, excel-analyst to explore
-- [e-006](e-006.md): 743 entries, explore to Ezri
-- [f-001](f-001.md): 955 entries, F-integrator to fastapi-specialist
-- [f-002](f-002.md): 932 entries, fastapi-specialist to fg-dividend-specialist
-- [f-003](f-003.md): 897 entries, fg-domain-builder to firebase-fetcher
-- [f-004](f-004.md): 960 entries, firebase-functions-engineer to flutter-expert
-- [f-005](f-005.md): 913 entries, flutter-expert to fp-implementer
-- [f-006](f-006.md): 954 entries, fp-judge to frontend-developer
-- [f-007](f-007.md): 881 entries, frontend-developer to fsharp-reviewer
-- [f-008](f-008.md): 472 entries, fsharp-reviewer to fyodor
-- [g-001](g-001.md): 882 entries, g-forge-dev to gbt-logic-developer
-- [g-002](g-002.md): 957 entries, gbt-recon-analyst to geracao-diagramas
-- [g-003](g-003.md): 915 entries, gerador-de-agente to gitops
-- [g-004](g-004.md): 957 entries, gitops to google-a2a-expert
-- [g-005](g-005.md): 946 entries, google-a2a-protocol-expert to growth
-- [g-006](g-006.md): 758 entries, growth to gza
-- [h-001](h-001.md): 869 entries, h1-research-worker to head-of-development
-- [h-002](h-002.md): 936 entries, head-of-development to hooks-expert
-- [h-003](h-003.md): 639 entries, hooks-grader to hyv-voiceover
-- [i-001](i-001.md): 891 entries, i-ab to impl-opus-medium
-- [i-002](i-002.md): 986 entries, impl-opus-xhigh to implementer
-- [i-003](i-003.md): 1,008 entries, implementer to inference-engine-expert
-- [i-004](i-004.md): 940 entries, inference-gateway-implementer to integration-checker
-- [i-005](i-005.md): 902 entries, integration-checker to investigator
-- [i-006](i-006.md): 990 entries, investigator to issue-tracker
-- [i-007](i-007.md): 298 entries, issue-tracker to izpitatelya
-- [j-001](j-001.md): 922 entries, j-flow-architect to json-contract-qa
-- [j-002](j-002.md): 245 entries, json-fixer to jwt-expert
-- [k-001](k-001.md): 893 entries, k to knowledge-architect
-- [k-002](k-002.md): 663 entries, knowledge-architect to kyzo-plan-task-completion-judge
-- [l-001](l-001.md): 851 entries, l-and-d-specialist to lead-architect
-- [l-002](l-002.md): 919 entries, lead-architect to lessons-miner
-- [l-003](l-003.md): 906 entries, lessons-optimizer-hyperagent to listing-syndication
-- [l-004](l-004.md): 935 entries, listing-wizard-defaults to loop-operator
-- [l-005](l-005.md): 357 entries, loop-orchestrator to Léa
-- [m-001](m-001.md): 918 entries, m to market-researcher
-- [m-002](m-002.md): 937 entries, market-researcher to mcp-design-agent
-- [m-003](m-003.md): 920 entries, mcp-developer to MEMORYOS_AGENT
-- [m-004](m-004.md): 976 entries, memos-logger to migration-actor
-- [m-005](m-005.md): 927 entries, migration-advisor to mmm-wheein
-- [m-006](m-006.md): 954 entries, mmr-code-reviewer-a to monetization-expert
-- [m-007](m-007.md): 962 entries, monetization-expert to mz-verifier
-- [n-001](n-001.md): 899 entries, n-plus-one-detector to nexter
-- [n-002](n-002.md): 940 entries, nextjs to npl-tdd-coder
-- [n-003](n-003.md): 256 entries, npl-tdd-debugger to nzism-compliance-check
-- [o-001](o-001.md): 943 entries, O'Brien to open-generative-ai-operator
-- [o-002](o-002.md): 951 entries, open-horizons-aeg-analyst to oracle-workflow
-- [o-003](o-003.md): 951 entries, oracle-x-reviewer to organizational-psychologist
-- [o-004](o-004.md): 551 entries, organizational-psychologist-zh to oyelaran
-- [p-001](p-001.md): 946 entries, p-code-review-correctness to pattern-critic
-- [p-002](p-002.md): 925 entries, pattern-curator to performance
-- [p-003](p-003.md): 962 entries, performance to Persistence Hunter
-- [p-004](p-004.md): 947 entries, persistence-detective to pipeline-architect
-- [p-005](p-005.md): 924 entries, pipeline-architect to plan-reviewer
-- [p-006](p-006.md): 1,057 entries, plan-reviewer to planner
-- [p-007](p-007.md): 951 entries, planner to plto-ui-reviewer
-- [p-008](p-008.md): 972 entries, pluggable-component-dev to pom-validator
-- [p-009](p-009.md): 912 entries, pom-wsjf-scorer to pr-message-reviewer
-- [p-010](p-010.md): 952 entries, pr-milestone-creator to precommit-gate
-- [p-011](p-011.md): 890 entries, precommit-runner to product
-- [p-012](p-012.md): 895 entries, product to product-system
-- [p-013](p-013.md): 890 entries, Product-Technical-Manager to project-researcher
-- [p-014](p-014.md): 900 entries, project-researcher to prosecutor-contract
-- [p-015](p-015.md): 942 entries, prosecutor-contract to python-inspector
-- [p-016](p-016.md): 270 entries, python-integration-test-expert to pz-server-dev
-- [q-001](q-001.md): 1,007 entries, q to qa-explorer
-- [q-002](q-002.md): 928 entries, qa-explorer to qp-perf-reviewer
-- [q-003](q-003.md): 957 entries, qp-security-reviewer to quota-budget-auditor
-- [q-004](q-004.md): 55 entries, quota-inventory to qx-partner
-- [r-001](r-001.md): 954 entries, R-adversarial to react-native-data-pipelines-developer
-- [r-002](r-002.md): 1,150 entries, react-native-database-sharding-developer to README
-- [r-003](r-003.md): 1,095 entries, README to Red Team Azure Container & Kubernetes Agent
-- [r-004](r-004.md): 946 entries, Red Team Compute to refcount-auditor
-- [r-005](r-005.md): 978 entries, referee to release-orchestrator
-- [r-006](r-006.md): 896 entries, release-orchestrator to report-writer-agent
-- [r-007](r-007.md): 914 entries, report-writer.prompt to research-director
-- [r-008](r-008.md): 937 entries, research-discovery to researcher
-- [r-009](r-009.md): 965 entries, researcher to retrospective-writer
-- [r-010](r-010.md): 984 entries, retrospective-writer to review-test-concurrency
-- [r-011](r-011.md): 1,092 entries, review-test-coverage to reviewer
-- [r-012](r-012.md): 1,090 entries, reviewer to reviewer-theory
-- [r-013](r-013.md): 948 entries, reviewer-top to roca-ticket-verify
-- [r-014](r-014.md): 980 entries, Rocket to rust-codegen-mapper
-- [r-015](r-015.md): 308 entries, rust-coder to rza
-- [s-001](s-001.md): 965 entries, S0+S2 × paper × 30 seeds → first populated VALIDA… to scaffolder
-- [s-002](s-002.md): 971 entries, scaffolder to scout
-- [s-003](s-003.md): 938 entries, scout to sdlc-cartographer
-- [s-004](s-004.md): 977 entries, sdlc-code-reviewer to security-architect
-- [s-005](s-005.md): 945 entries, security-architect to security-engineer
-- [s-006](s-006.md): 941 entries, security-engineer to security-reviewer
-- [s-007](s-007.md): 978 entries, security-reviewer to selectors
-- [s-008](s-008.md): 895 entries, selectors-expert to seo-geo-optimizer
-- [s-009](s-009.md): 922 entries, seo-geo-specialist to shader-artist
-- [s-010](s-010.md): 917 entries, shader-artist to simplifier
-- [s-011](s-011.md): 923 entries, simplifier to skill-updater
-- [s-012](s-012.md): 929 entries, skill-updater to socratic-guide
-- [s-013](s-013.md): 885 entries, socratic-interviewer to source-researcher
-- [s-014](s-014.md): 915 entries, source-researcher to spec-planner
-- [s-015](s-015.md): 1,025 entries, spec-planner to speckit.sync.conflicts.agent
-- [s-016](s-016.md): 912 entries, speckit.sync.propose.agent to Staff Documentation Engineer
-- [s-017](s-017.md): 940 entries, Staff Engineer to store-dev
-- [s-018](s-018.md): 903 entries, store-fixer to style-analyst
-- [s-019](s-019.md): 964 entries, style-analyzer to svelte-reviewer
-- [s-020](s-020.md): 954 entries, svelte-reviewer to sysadmin
-- [s-021](s-021.md): 332 entries, sysadmin to Szeth
+- [0-9-001](0-9-001.md): 1,090 entries, $(echo $agent | sed 's/-/ /g' | sed 's/\b\(.\)/\u… to 2026-11-12-eir-reads-the-desk-where-it-stands-and…
+- [0-9-002](0-9-002.md): 926 entries, 2026-11-12-the-batch-brief to 🧪 tester
+- [a-001](a-001.md): 908 entries, a to accessibility-specialist
+- [a-002](a-002.md): 919 entries, accessibility-specialist to adversarial-io-validation
+- [a-003](a-003.md): 922 entries, adversarial-irs-agent to agent
+- [a-004](a-004.md): 977 entries, agent to agent-xfn
+- [a-005](a-005.md): 1,043 entries, agent-zero to ai-discovery-strategist
+- [a-006](a-006.md): 912 entries, ai-djiyata to alice
+- [a-007](a-007.md): 941 entries, alice to android-a11y-reviewer
+- [a-008](a-008.md): 935 entries, android-aab-analyzer to api-compat-checker
+- [a-009](a-009.md): 913 entries, api-compat-reviewer to apple-ux-wireframer
+- [a-010](a-010.md): 981 entries, apple-ux-wireframer to architect
+- [a-011](a-011.md): 996 entries, architect to architect.agent
+- [a-012](a-012.md): 881 entries, architect.data-platform-engineer to arckit-gov-reuse-reader
+- [a-013](a-013.md): 875 entries, arckit-gov-reuse-writer to asset_maker
+- [a-014](a-014.md): 939 entries, assetcore-ba to auditor
+- [a-015](a-015.md): 932 entries, auditor to Azure SaaS Architect mode instructions
+- [a-016](a-016.md): 115 entries, Azure Smart City IoT Architect to azurelocal.github.io-engineer
+- [b-001](b-001.md): 955 entries, b to backend-expert-csk
+- [b-002](b-002.md): 900 entries, backend-explorer to be-review-writer
+- [b-003](b-003.md): 935 entries, be-reviewer to blog-critic
+- [b-004](b-004.md): 985 entries, blog-cross-model-critic to brainstormer-critic
+- [b-005](b-005.md): 920 entries, brainstormer-facts to bug-fixer
+- [b-006](b-006.md): 1,038 entries, bug-fixer to builder-sonnet
+- [b-007](b-007.md): 471 entries, builder-spring-feature to B站内容策略师
+- [c-001](c-001.md): 932 entries, C# Code Reviewer to cassandra-performance-optimization-auditor
+- [c-002](c-002.md): 962 entries, cassandra-qa-agent-README to channel-auditor
+- [c-003](c-003.md): 938 entries, channel-auditor to ci-infra-plan-reviewer
+- [c-004](c-004.md): 952 entries, ci-infra-planner to claude-config-specialist
+- [c-005](c-005.md): 890 entries, claude-config-updater to cloud-native-specialist
+- [c-006](c-006.md): 935 entries, cloud-networking-architect to code-filter
+- [c-007](c-007.md): 880 entries, code-finder to code-reviewer
+- [c-008](c-008.md): 1,009 entries, code-reviewer to code-reviewer
+- [c-009](c-009.md): 1,034 entries, code-reviewer to code-reviewer
+- [c-010](c-010.md): 941 entries, code-reviewer to codebase-explorer
+- [c-011](c-011.md): 954 entries, codebase-explorer to codex-reviewer
+- [c-012](c-012.md): 929 entries, codex-reviewer to commit-reviewer-common
+- [c-013](c-013.md): 971 entries, commit-reviewer-general to component-builder
+- [c-014](c-014.md): 913 entries, component-builder to consolidator
+- [c-015](c-015.md): 948 entries, consolidator to context-graphs
+- [c-016](c-016.md): 917 entries, context-grounding-review to coordinator
+- [c-017](c-017.md): 931 entries, coordinator to course-chapter-writer
+- [c-018](c-018.md): 961 entries, course-conductor to critic
+- [c-019](c-019.md): 937 entries, critic to cs-wiki-linter
+- [c-020](c-020.md): 827 entries, cs-wiki-linter to CzechLawAdvisor
+- [d-001](d-001.md): 924 entries, d-coping-editor to data-lead
+- [d-002](d-002.md): 935 entries, data-lead to database-specialist
+- [d-003](d-003.md): 934 entries, database-specialist to debug-agent
+- [d-004](d-004.md): 1,009 entries, debug-agent to deep-o-stock-analyst
+- [d-005](d-005.md): 943 entries, deep-paper-researcher to dependency-scanner
+- [d-006](d-006.md): 908 entries, dependency-scanner to design-engineer
+- [d-007](d-007.md): 900 entries, design-engineer-reviewer to designer
+- [d-008](d-008.md): 990 entries, designer to developer-breakdown-strategist
+- [d-009](d-009.md): 953 entries, developer-child to devops-engineer
+- [d-010](d-010.md): 920 entries, devops-engineer to discovery-agent
+- [d-011](d-011.md): 949 entries, discovery-agent to doc-sync
+- [d-012](d-012.md): 979 entries, doc-sync to docs-link-checker
+- [d-013](d-013.md): 925 entries, docs-link-fixer to documentation-generator
+- [d-014](d-014.md): 1,037 entries, documentation-generator to dotnet-architect
+- [d-015](d-015.md): 907 entries, dotnet-architecture-review to dx-ux-strategist
+- [d-016](d-016.md): 41 entries, dx-ux-strategist to dyspraxia-advocate
+- [e-001](e-001.md): 944 entries, E-Commerce Catalog Designer to ehs-supply-chain
+- [e-002](e-002.md): 913 entries, ehs-verifier to engineering-devops-automator-zh
+- [e-003](e-003.md): 927 entries, engineering-director to etcd-maintenance
+- [e-004](e-004.md): 978 entries, eth-native-handler-analyzer to ExamplesDeveloperAgent-HAIKU
+- [e-005](e-005.md): 971 entries, ExamplesDeveloperAgent-OPUS to Explore
+- [e-006](e-006.md): 781 entries, explore to Ezri
+- [f-001](f-001.md): 957 entries, F-integrator to fastapi-setup-agent
+- [f-002](f-002.md): 933 entries, fastapi-specialist to fg-component-builder
+- [f-003](f-003.md): 896 entries, fg-contract-reviewer to firebase-backend-security.knowledge
+- [f-004](f-004.md): 962 entries, firebase-backend-security.pii-logging-platform.kn… to flutter-device-orchestrator
+- [f-005](f-005.md): 908 entries, flutter-device-orchestrator to fowler-refactoring-reviewer
+- [f-006](f-006.md): 962 entries, foxtrot to frontend-developer
+- [f-007](f-007.md): 880 entries, frontend-developer to frr-config-generator
+- [f-008](f-008.md): 509 entries, frr-reviewer to fyodor
+- [g-001](g-001.md): 883 entries, g-forge-dev to gbt-domain-architect
+- [g-002](g-002.md): 958 entries, gbt-logic-developer to geoscience-mentor
+- [g-003](g-003.md): 914 entries, geospatial-analyst to gitlab-repo-management
+- [g-004](g-004.md): 954 entries, gitleaks-agent to gonzales
+- [g-005](g-005.md): 948 entries, good to grounding-verifier
+- [g-006](g-006.md): 803 entries, grounding-verifier to gza
+- [h-001](h-001.md): 869 entries, h1-research-worker to head-judge-synthesizer
+- [h-002](h-002.md): 938 entries, head-motion-reviewer to hooks-auditor
+- [h-003](h-003.md): 654 entries, hooks-author to hyv-voiceover
+- [i-001](i-001.md): 890 entries, i-ab to impl-haiku
+- [i-002](i-002.md): 985 entries, impl-judge to implementer
+- [i-003](i-003.md): 1,014 entries, implementer to indicator-orchestrator
+- [i-004](i-004.md): 942 entries, indie-hacker to integration-architect
+- [i-005](i-005.md): 899 entries, integration-architect to investigator
+- [i-006](i-006.md): 975 entries, investigator to issue-tracker
+- [i-007](i-007.md): 378 entries, issue-tracker to izpitatelya
+- [j-001](j-001.md): 923 entries, j-flow-architect to json-fixer
+- [j-002](j-002.md): 246 entries, json-generator to jwt-expert
+- [k-001](k-001.md): 894 entries, k to knowledge-archaeologist
+- [k-002](k-002.md): 676 entries, knowledge-architect to kyzo-plan-task-completion-judge
+- [l-001](l-001.md): 850 entries, l-and-d-specialist to lead-analyst-retired
+- [l-002](l-002.md): 918 entries, lead-architect to lesson-writer
+- [l-003](l-003.md): 910 entries, lesson-writer.agent to listing-agent
+- [l-004](l-004.md): 931 entries, listing-and-transaction-coordinator to loop-investigator
+- [l-005](l-005.md): 385 entries, loop-lesson-synthesizer to Léa
+- [m-001](m-001.md): 919 entries, m to market-researcher
+- [m-002](m-002.md): 938 entries, market-researcher to mcp-contract-checker
+- [m-003](m-003.md): 921 entries, mcp-contract-reviewer to memory-warden
+- [m-004](m-004.md): 972 entries, memory-warden to migrate.abstract.agent
+- [m-005](m-005.md): 933 entries, migrate.architect.agent to mlx-performance-agent
+- [m-006](m-006.md): 951 entries, mlx-specialist to momus
+- [m-007](m-007.md): 965 entries, momus to myna-reviewer-security
+- [m-008](m-008.md): 34 entries, myna-reviewer-skeptic to mz-verifier
+- [n-001](n-001.md): 900 entries, n-plus-one-detector to next16-migration-reviewer
+- [n-002](n-002.md): 935 entries, nextauth-security-reviewer to npl-grader
+- [n-003](n-003.md): 284 entries, npl-idea-to-spec to nzism-compliance-check
+- [o-001](o-001.md): 939 entries, O'Brien to opc-plan-checker
+- [o-002](o-002.md): 955 entries, opc-planner to oracle-evaluator
+- [o-003](o-003.md): 955 entries, oracle-expert to org-designer
+- [o-004](o-004.md): 582 entries, org-designer to oyelaran
+- [p-001](p-001.md): 947 entries, p-code-review-correctness to pattern-conformance-reviewer
+- [p-002](p-002.md): 920 entries, pattern-consistency-checker to perf-tuner
+- [p-003](p-003.md): 969 entries, perf-verifier to perplexity-search
+- [p-004](p-004.md): 947 entries, perplexity-sec to pipeline
+- [p-005](p-005.md): 923 entries, pipeline to plan-reviewer
+- [p-006](p-006.md): 1,049 entries, plan-reviewer to planner
+- [p-007](p-007.md): 948 entries, planner to playwright-test-runner
+- [p-008](p-008.md): 975 entries, playwright-test-writer to polish-planner
+- [p-009](p-009.md): 922 entries, polish-qa-agent to pr-feedback-triager
+- [p-010](p-010.md): 950 entries, pr-file-analyst to pre-dev-validator
+- [p-011](p-011.md): 895 entries, pre-existing-bug-auditor to procurement-researcher
+- [p-012](p-012.md): 900 entries, procurement-reviewer to product-scribe
+- [p-013](p-013.md): 897 entries, product-scribe to project-manager
+- [p-014](p-014.md): 890 entries, project-manager to proposal-writer
+- [p-015](p-015.md): 966 entries, proposal-writer to python-engineer
+- [p-016](p-016.md): 374 entries, python-engineer to pz-server-dev
+- [q-001](q-001.md): 1,008 entries, q to qa-expert
+- [q-002](q-002.md): 926 entries, qa-explorer to qoq-tester
+- [q-003](q-003.md): 959 entries, qos-agent to quorum-qa-handoff-publisher
+- [q-004](q-004.md): 66 entries, quorum-review-loop to qx-partner
+- [r-001](r-001.md): 954 entries, R-adversarial to react-native-converter
+- [r-002](r-002.md): 1,149 entries, react-native-data-pipelines-developer to README
+- [r-003](r-003.md): 1,107 entries, README to recursion-guard-auditor
+- [r-004](r-004.md): 949 entries, recursion-guard-auditor to refactoring-specialist
+- [r-005](r-005.md): 972 entries, refactoring-specialist to release-manager-agent
+- [r-006](r-006.md): 907 entries, release-manager-agent to report-writer
+- [r-007](r-007.md): 910 entries, report-writer to research-collector
+- [r-008](r-008.md): 928 entries, research-collector to researcher
+- [r-009](r-009.md): 974 entries, researcher to retro-analyzer
+- [r-010](r-010.md): 978 entries, retro-bot to review-security
+- [r-011](r-011.md): 1,087 entries, review-security to reviewer
+- [r-012](r-012.md): 1,094 entries, reviewer to reviewer-readonly
+- [r-013](r-013.md): 958 entries, reviewer-reconcile to roadmap-planner
+- [r-014](r-014.md): 982 entries, roadmap-planner to runtime-triage
+- [r-015](r-015.md): 420 entries, runtime-validation to rza
+- [s-001](s-001.md): 964 entries, S0+S2 × paper × 30 seeds → first populated VALIDA… to scaffolder
+- [s-002](s-002.md): 972 entries, scaffolder to scout
+- [s-003](s-003.md): 940 entries, scout to sdl-game-helper
+- [s-004](s-004.md): 978 entries, sdlc to security-analyzer
+- [s-005](s-005.md): 947 entries, security-analyzer to security-engineer
+- [s-006](s-006.md): 936 entries, security-engineer to security-reviewer
+- [s-007](s-007.md): 975 entries, security-reviewer to segmenter_agent
+- [s-008](s-008.md): 900 entries, segreteria-ea to seo-data-analyst
+- [s-009](s-009.md): 934 entries, seo-data-tools to sfra-aggregator
+- [s-010](s-010.md): 908 entries, sfra-explorer-assembler to simple-gate
+- [s-011](s-011.md): 926 entries, simple-implementation-planner to skill-reviewer
+- [s-012](s-012.md): 930 entries, skill-reviewer to social-media
+- [s-013](s-013.md): 894 entries, social-media-agent to Source Discoverer
+- [s-014](s-014.md): 912 entries, source-access to spec-impl
+- [s-015](s-015.md): 953 entries, spec-impl-comparator to speckit.architecture-guard.architecture-apply.age…
+- [s-016](s-016.md): 968 entries, speckit.architecture-guard.architecture-review.ag… to srp-analyzer
+- [s-017](s-017.md): 953 entries, srp-checker to stepfunctions-scout
+- [s-018](s-018.md): 905 entries, stephen-fact-check-director to structured-logging-architect
+- [s-019](s-019.md): 945 entries, structured-output to surface-design
+- [s-020](s-020.md): 954 entries, surface-discovery-agent to synthesis-critic
+- [s-021](s-021.md): 512 entries, synthesis-critic to Szeth
 - [t-001](t-001.md): 768 entries, T'Challa to taiko-shadow
-- [t-002](t-002.md): 951 entries, taiko-x402 to taylor
-- [t-003](t-003.md): 970 entries, tayniyat-agent to teams-orchestrator
-- [t-004](t-004.md): 887 entries, teamwright to telegram-staff-bot-dev
-- [t-005](t-005.md): 964 entries, TELEGRAM_PHASE2_INTEGRATION to test-config-writer
-- [t-006](t-006.md): 974 entries, test-consensus to test-quality-auditor
-- [t-007](t-007.md): 1,057 entries, test-quality-auditor to test-writer
-- [t-008](t-008.md): 1,050 entries, test-writer to testing-infrastructure
-- [t-009](t-009.md): 883 entries, testing-lead to ticket-fetcher
-- [t-010](t-010.md): 945 entries, ticket-filing to tracker-sync-agent
-- [t-011](t-011.md): 968 entries, tracker-writer to tron-integrator-shieldedusdt
-- [t-012](t-012.md): 781 entries, tron-integrator-sunswap to tzevaadom-alerts.NOTES
-- [u-001](u-001.md): 898 entries, u-god to ui-ux-designer
-- [u-002](u-002.md): 894 entries, ui-ux-designer to usability-critic
-- [u-003](u-003.md): 895 entries, usability-editor to ux-style-migrator
-- [u-004](u-004.md): 108 entries, ux-sub-agent to uygulayici
-- [v-001](v-001.md): 966 entries, v-memory to verification-engineer
-- [v-002](v-002.md): 981 entries, verification-engineer.agent to vhdl-codegen
-- [v-003](v-003.md): 938 entries, vhdl-codegen to voting-and-ballots
-- [v-004](v-004.md): 309 entries, vouch-verifier to vyvojar
-- [w-001](w-001.md): 906 entries, w-edwards-deming-operator to web3-specialist
-- [w-002](w-002.md): 918 entries, web3-tokenomics to wordpress-security
-- [w-003](w-003.md): 1,013 entries, wordpress-seo to world-cup-scout
-- [w-004](w-004.md): 511 entries, world-cup-strength-analyst to wz:code-reviewer
-- [x-001](x-001.md): 199 entries, x to xy-coach
-- [y-001](y-001.md): 238 entries, yaat-explore to yytoolkit-provenance
-- [z-001](z-001.md): 230 entries, z to zz-vetter
+- [t-002](t-002.md): 954 entries, taiko-x402 to taxonomy-extremist
+- [t-003](t-003.md): 971 entries, taxonomy-gap-analyzer to Teams Extension Tuner
+- [t-004](t-004.md): 887 entries, Teams Notifier to telecom-routing-advisor
+- [t-005](t-005.md): 968 entries, telegram-auth to test-code-adapter
+- [t-006](t-006.md): 968 entries, test-code-critic to test-planner
+- [t-007](t-007.md): 1,056 entries, test-planner to test-writer
+- [t-008](t-008.md): 1,050 entries, test-writer to testing-coordinator-agent
+- [t-009](t-009.md): 885 entries, testing-deps-investigator to thyme-documentation-integrator
+- [t-010](t-010.md): 935 entries, thyme-extension-engineer to trace-differ
+- [t-011](t-011.md): 990 entries, trace-hexdump-extractor to tribunal-persona-mediator
+- [t-012](t-012.md): 858 entries, tribunal-persona-systems-thinker to tzevaadom-alerts.NOTES
+- [u-001](u-001.md): 911 entries, u-god to ui-ux-designer
+- [u-002](u-002.md): 889 entries, ui-ux-designer to url-link-extractor
+- [u-003](u-003.md): 896 entries, url-link-extractor to ux-reviewer
+- [u-004](u-004.md): 145 entries, ux-reviewer to uygulayici
+- [v-001](v-001.md): 969 entries, v-memory to verification-engineer
+- [v-002](v-002.md): 982 entries, verification-engineer to vf-reviewer
+- [v-003](v-003.md): 928 entries, vf-screenwriter to volt
+- [v-004](v-004.md): 332 entries, volt-code-reviewer to vyvojar
+- [w-001](w-001.md): 908 entries, w-edwards-deming-operator to web3
+- [w-002](w-002.md): 920 entries, web3 to WordPress Performance Engineer
+- [w-003](w-003.md): 1,005 entries, WordPress Shopping Cart Engineer to worktree-manager
+- [w-004](w-004.md): 563 entries, worktree-manager to wz:code-reviewer
+- [x-001](x-001.md): 202 entries, x to xy-coach
+- [y-001](y-001.md): 239 entries, yaat-explore to yytoolkit-provenance
+- [z-001](z-001.md): 232 entries, z to zz-vetter

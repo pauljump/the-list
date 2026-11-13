@@ -3,22 +3,22 @@
  "read": "2026-11-13",
  "queue": {
   "binary": 25,
-  "missing": 35701,
-  "ok": 1831080
+  "gone": 34986,
+  "ok": 1887558
  },
  "plugins": {
-  "entries": 112929,
+  "entries": 113195,
   "pages": 99,
   "csv": [
    "plugins.csv"
   ],
-  "rows": 135266,
-  "described": 101094,
-  "gone": 3473
+  "rows": 135679,
+  "described": 101356,
+  "gone": 3539
  },
  "skills": {
-  "entries": 902914,
-  "pages": 1075,
+  "entries": 938965,
+  "pages": 1116,
   "csv": [
    "skills-1.csv",
    "skills-2.csv",
@@ -29,63 +29,64 @@
    "skills-7.csv",
    "skills-8.csv",
    "skills-9.csv",
-   "skills-10.csv"
+   "skills-10.csv",
+   "skills-11.csv"
   ],
-  "files": 1621951,
-  "unique": 1067629,
-  "read": 1047995,
-  "described": 901702
+  "files": 1681040,
+  "unique": 1110772,
+  "read": 1091894,
+  "described": 937588
  },
  "agents": {
-  "entries": 171807,
-  "pages": 195,
+  "entries": 173382,
+  "pages": 198,
   "csv": [
    "agents-1.csv",
    "agents-2.csv"
   ],
-  "files": 297874,
-  "unique": 210119,
-  "read": 204191,
-  "described": 170676
+  "files": 300619,
+  "unique": 212078,
+  "read": 206286,
+  "described": 172232
  },
  "commands": {
-  "entries": 165826,
+  "entries": 166738,
   "pages": 128,
   "csv": [
    "commands-1.csv",
    "commands-2.csv"
   ],
-  "files": 269887,
-  "unique": 184931,
-  "read": 181090,
-  "described": 165184
+  "files": 271362,
+  "unique": 185850,
+  "read": 182099,
+  "described": 166092
  },
  "mcp-servers": {
-  "entries": 15465,
+  "entries": 19901,
   "pages": 27,
   "csv": [
    "mcp-servers.csv"
   ],
-  "files": 21177
+  "files": 21405,
+  "directory": 4298
  },
  "hooks": {
-  "entries": 50874,
+  "entries": 51124,
   "pages": 40,
   "csv": [
    "hooks.csv"
   ],
-  "files": 67169
+  "files": 67549
  },
  "repos": {
-  "entries": 94819,
+  "entries": 100432,
   "seen": 130072,
   "by_status": {
-   "treed": 104489,
-   "gone": 15751,
+   "treed": 110853,
+   "gone": 16106,
    "done": 45,
-   "empty": 35,
-   "new": 293,
-   "resolved": 9459
+   "empty": 45,
+   "resolved": 3023
   }
  }
 }

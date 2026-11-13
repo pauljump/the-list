@@ -4,6 +4,7 @@
     python3 crawl/fetch_text.py /path/to/signal.db prepare     # build the work queue (once)
     python3 crawl/fetch_text.py /path/to/signal.db enqueue     # add files found by a later tree pass
     python3 crawl/fetch_text.py /path/to/signal.db run [--max-seconds N] [--follow]
+    python3 crawl/fetch_text.py /path/to/signal.db retry-missing   # last: files whose sha is gone
     python3 crawl/fetch_text.py /path/to/signal.db status
 
 Read-only against GitHub: `gh api graphql` only, so the token stays inside gh. No model calls.
@@ -319,6 +320,64 @@ class Fetcher:
                     time.sleep(max(60, min(3700, reset - time.time() + 5)))
         self.log(f"run end: ok {n_ok:,} missing {n_miss:,} calls {calls:,} in {(time.time() - start) / 60:.0f} min")
 
+    def retry_missing(self):
+        """A sha can vanish (force-push, deleted file). Take the file now at the same path instead, once."""
+        c = self.con
+        rows = c.execute("""
+            select sha, kind, size, repo, path from (
+                select q.sha, q.kind, q.size, c.repo, c.path,
+                       row_number() over (partition by q.sha order by coalesce(r.is_fork, 0), coalesce(r.stars, 0) desc, c.repo) rn
+                from blob_queue q join components c on c.sha = q.sha left join repos r on r.full_name = c.repo
+                where q.status = 'missing' and coalesce(r.status, '') != 'gone'
+            ) where rn = 1 order by repo""").fetchall()
+        self.log(f"retry-missing: {len(rows):,} files to look for at their current path")
+        n_ok, i, per_call, last_call = 0, 0, 60, 0.0
+        while i < len(rows):
+            group, repos = [], set()
+            while i < len(rows) and len(group) < per_call and (rows[i]["repo"] in repos or len(repos) < CALL_REPOS):
+                group.append(rows[i]); repos.add(rows[i]["repo"]); i += 1
+            by_repo = {}
+            for r in group:
+                by_repo.setdefault(r["repo"], []).append(r)
+            parts = []
+            for k, (repo, rs) in enumerate(by_repo.items()):
+                owner, _, name = repo.partition("/")
+                blobs = " ".join(f'b{r["sha"]}: object(expression: {json.dumps("HEAD:" + r["path"])}) {{ ... on Blob {{ text isTruncated isBinary }} }}' for r in rs)
+                parts.append(f"r{k}: repository(owner: {json.dumps(owner)}, name: {json.dumps(name)}) {{ {blobs} }}")
+            wait = MIN_GAP - (time.time() - last_call)
+            if wait > 0:
+                time.sleep(wait)
+            data, problem = self.graphql("query { " + " ".join(parts) + " }")
+            last_call = time.time()
+            if problem == "rate":
+                self.log(f"rate limited ({self.rate_msg}); sleeping 120s")
+                time.sleep(120)
+                i -= len(group)
+                continue
+            if problem == "heavy" and per_call > 5:
+                per_call = max(5, per_call // 2)
+                i -= len(group)
+                continue
+            for k, (repo, rs) in enumerate(by_repo.items()):
+                rd = (data or {}).get(f"r{k}") or {}
+                for r in rs:
+                    b = rd.get(f"b{r['sha']}")
+                    if b and b.get("text") is not None:
+                        try:
+                            self.store(r["sha"], r["kind"], r["size"], repo, r["path"], b["text"], b.get("isTruncated"))
+                        except Exception as ex:
+                            self.log(f"store failed {r['sha']}: {ex!r}"[:200])
+                            continue
+                        c.execute("update blob_queue set status='ok' where sha=?", (r["sha"],))
+                        n_ok += 1
+                    else:
+                        c.execute("update blob_queue set status='gone' where sha=?", (r["sha"],))
+            c.commit()
+        left = c.execute("select count(*) from blob_queue where status='missing'").fetchone()[0]
+        c.execute("update blob_queue set status='gone' where status='missing'")
+        c.commit()
+        self.log(f"retry-missing end: {n_ok:,} recovered; {left:,} had no live repo")
+
     def status(self):
         c = self.con
         print("queue:", dict(c.execute("select coalesce(status,'pending'), count(*) from blob_queue group by 1").fetchall()))
@@ -327,13 +386,15 @@ class Fetcher:
 
 
 if __name__ == "__main__":
-    if len(sys.argv) < 3 or sys.argv[2] not in ("prepare", "enqueue", "run", "status"):
+    if len(sys.argv) < 3 or sys.argv[2] not in ("prepare", "enqueue", "run", "retry-missing", "status"):
         sys.exit(__doc__)
     f = Fetcher(sys.argv[1])
     if sys.argv[2] == "prepare":
         f.prepare()
     elif sys.argv[2] == "enqueue":
         f.enqueue()
+    elif sys.argv[2] == "retry-missing":
+        f.retry_missing()
     elif sys.argv[2] == "status":
         f.status()
     else:

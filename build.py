@@ -451,6 +451,16 @@ class Build:
                         groups[key] = g = cand
                     g["copies"] = copies
         entries = [e for e in groups.values() if e["name"]]
+        for e in entries:
+            e["desc"], e["source"] = "", "config"
+        n_dir = 0
+        # the directory of MCP servers on claudemarketplaces.com: one repo per server
+        for r in self.con.execute("select full_name, description from repos where discovered_via like '%claudemarketplaces-mcp%' "
+                                  "and status != 'gone' and description is not null and description != ''"):
+            n_dir += 1
+            entries.append({"name": r["full_name"].split("/")[-1], "type": "", "command": "", "package": "", "host": "",
+                            "repo": r["full_name"], "path": "", "meta": self.meta(r["full_name"]), "copies": 0,
+                            "desc": clean(r["description"]), "source": "directory"})
         entries.sort(key=lambda e: (e["name"].lower(), -e["copies"], e["repo"].lower()))
 
         def how(e):
@@ -460,25 +470,33 @@ class Build:
 
         def row(e):
             m = e["meta"]
-            return [e["name"], e["type"], e["command"], e["package"], e["host"], e["copies"], e["repo"],
-                    gh_url(e["repo"], e["path"]), m["stars"]]
+            return [e["name"], clip(e["desc"]), e["source"], e["type"], e["command"], e["package"], e["host"], e["copies"] or "",
+                    e["repo"], gh_url(e["repo"], e["path"]), m["stars"]]
 
         def line(e):
             tail = [f"[{e['repo']}]({gh_url(e['repo'], e['path'])})"]
+            if e["source"] == "directory":
+                if e["meta"]["stars"]:
+                    tail.append(f"★{num(e['meta']['stars'])}")
+                return f"- **{md(e['name'])}**: {md(clip(e['desc']))} ({' · '.join(tail)})\n"
             if e["copies"] > 1:
                 tail.append(f"in {num(e['copies'])} configs")
             return f"- **{md(e['name'])}**: {md(how(e))} ({' · '.join(tail)})\n"
 
         self.write_kind(
             "mcp-servers", "MCP servers",
-            f"{len(entries):,} MCP servers that people wire into Claude Code, read from {n_files:,} `.mcp.json` files.",
-            entries, ["name", "type", "command", "package", "host", "copies", "example_repo", "example_url", "stars"], row, line,
-            ["One entry per server name and target (package or host). `copies` is how many configs use it, which is the "
-             "closest thing here to a popularity count.",
-             "Only the launcher, the package name and the host are kept. Arguments, environment variables, headers and "
-             "URL paths are dropped because configs often carry keys.",
-             "These files have no description field, so there is none here."])
-        self.stats["mcp-servers"].update(files=n_files)
+            f"{len(entries):,} MCP servers: {len(entries) - n_dir:,} that people wire into Claude Code, read from {n_files:,} "
+            f"`.mcp.json` files, and {n_dir:,} server repos from the claudemarketplaces.com MCP directory.",
+            entries, ["name", "description", "source", "type", "command", "package", "host", "copies", "repo", "url", "stars"],
+            row, line,
+            ["`source` is `config` for a server found in someone's `.mcp.json`, and `directory` for a server repo listed in "
+             "the claudemarketplaces.com MCP directory.",
+             "Config entries: one per server name and target (package or host). `copies` is how many configs use it, the "
+             "closest thing here to a popularity count. Only the launcher, the package name and the host are kept; "
+             "arguments, environment variables, headers and URL paths are dropped because configs often carry keys. "
+             "Config files have no description field, so those entries have none.",
+             "Directory entries: the description is the repo's own. The same server can appear under both sources."])
+        self.stats["mcp-servers"].update(files=n_files, directory=n_dir)
 
     # ---------- hooks ----------
 
@@ -617,7 +635,7 @@ class Build:
         queue = dict(self.con.execute("select coalesce(status,'pending'), count(*) from blob_queue group by 1").fetchall()) if self.has_blobs else {}
         rows = [("plugins", "Plugins", "entries of marketplace listings"), ("skills", "Skills", "`SKILL.md` files"),
                 ("agents", "Agents", "subagent definitions, `agents/*.md`"), ("commands", "Commands", "slash commands, `commands/*.md`"),
-                ("mcp-servers", "MCP servers", "servers named in `.mcp.json` files"), ("hooks", "Hooks", "hook setups in `hooks.json` and `settings.json`")]
+                ("mcp-servers", "MCP servers", "servers named in `.mcp.json` files, plus a directory of server repos"), ("hooks", "Hooks", "hook setups in `hooks.json` and `settings.json`")]
         out = ["# The list\n\n",
                "Everything people have built for Claude Code and published on GitHub, with what each thing does and where it lives. "
                "Plugins, skills, agents, commands, MCP servers and hooks. Skills and agents written for other coding agents "
@@ -663,7 +681,8 @@ class Build:
         out.append(f"- **Plugins:** {st['rows']:,} marketplace entries, {st['entries']:,} after folding copies, {st['described']:,} with a description.\n")
         bs = s["repos"]["by_status"]
         out.append(f"- **Repos:** {s['repos']['seen']:,} seen, {bs.get('treed', 0) + bs.get('done', 0):,} opened, "
-                   f"{bs.get('gone', 0):,} already gone, {bs.get('resolved', 0) + bs.get('new', 0):,} not opened yet.\n")
+                   f"{bs.get('gone', 0):,} already gone, {bs.get('resolved', 0) + bs.get('new', 0):,} MCP server repos "
+                   "kept for their description only.\n")
         if queue.get("pending"):
             out.append(f"- **In progress:** {queue['pending']:,} files are still being read; this list will grow.\n")
         out.append("\nThe scripts that read the files and build these pages are in `crawl/` and `build.py`. "
