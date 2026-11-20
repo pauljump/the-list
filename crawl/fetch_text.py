@@ -13,7 +13,8 @@ Resumable: every call commits, and `run` picks up where the last one stopped.
 The crawl's `components` table has one row per file per repo. Most files are copies (forks, vendored
 skill packs), so the work is done per git blob sha: each unique content is fetched once, from the
 most-starred live repo that holds it. The parsed frontmatter (name, description) goes in `blobs`, the
-text itself zlib-compressed in `blob_text`, kept apart so that reading the metadata stays fast.
+text itself zlib-compressed in `blob_text`, kept apart so that reading the metadata stays fast. Set
+THE_LIST_TEXT_DB to keep that table in its own database file.
 """
 import calendar
 import json
@@ -34,6 +35,7 @@ except ImportError:
 KINDS = ("skill", "agent", "command", "plugin", "marketplace", "hook", "settings", "mcp", "lsp", "readme",
          "claude-md", "package")
 MAX_BLOB_BYTES = 200_000
+FM_KEEP = {"allowed-tools", "allowed_tools", "tools", "model", "license", "argument-hint", "argument_hint"}
 MAX_ATTEMPTS = 3            # distinct repos tried for one sha before it is recorded as missing
 CALL_BLOBS = 100            # blobs per GraphQL call, adapted down when GitHub cannot serve a call
 CALL_BYTES = 1_500_000
@@ -54,6 +56,11 @@ class Fetcher:
         self.con.row_factory = sqlite3.Row
         self.con.execute("pragma busy_timeout=120000")
         self.con.execute("pragma synchronous=normal")
+        # the file text can live in its own database (on a big, slow disk) while the metadata stays on a fast one
+        text_db = os.environ.get("THE_LIST_TEXT_DB")
+        if text_db:
+            self.con.execute("attach database ? as txt", (text_db,))
+        self.T = "txt.blob_text" if text_db else "blob_text"
         self.call_blobs = CALL_BLOBS
 
     def log(self, msg):
@@ -70,9 +77,9 @@ class Fetcher:
             create table if not exists blobs(
                 sha text primary key, kind text, size int, status text, truncated int,
                 name text, description text, lead text, fm text, repo text, path text, fetched_at text);
-            create table if not exists blob_text(sha text primary key, z blob);
             create index if not exists components_sha on components(sha);
         """)
+        c.execute(f"create table if not exists {self.T}(sha text primary key, z blob)")
         if c.execute("select 1 from sqlite_master where name='blob_queue'").fetchone():
             self.log("prepare: queue exists")
             return
@@ -96,36 +103,75 @@ class Fetcher:
         c.commit()
         self.log(f"prepare: {c.execute('select count(*) from blob_queue').fetchone()[0]:,} blobs queued")
 
-    def enqueue(self):
-        """Queue the shas of components added since `prepare` (a later tree pass found more repos)."""
+    def enqueue(self, full=False):
+        """Queue the shas of components that a later tree pass found. Reads first, writes in small batches,
+        so other writers sharing the database are never locked out for long."""
         c = self.con
+        c.execute("create table if not exists fetch_kv(k text primary key, v text)")
+        since = None if full else (c.execute("select v from fetch_kv where k='last_enqueue'").fetchone() or [None])[0]
+        started = now()
         marks = ",".join("?" * len(KINDS))
-        before = c.execute("select count(*) from blob_queue").fetchone()[0]
-        c.execute(f"""
-            insert or ignore into blob_queue(sha, repo, path, size, kind, stars, attempts, tried, status)
-            select sha, repo, path, size, kind, stars, 0, '', null from (
-                select c.sha, c.repo, c.path, c.size, c.kind, coalesce(r.stars, 0) stars,
-                       row_number() over (partition by c.sha order by coalesce(r.is_fork, 0), coalesce(r.stars, 0) desc, c.repo) rn
-                from components c left join repos r on r.full_name = c.repo
-                where c.sha is not null and coalesce(c.size, 0) <= ? and c.kind in ({marks})
-                  and c.sha not in (select sha from blob_queue) and c.sha not in (select sha from blobs)
-            ) where rn = 1""", (MAX_BLOB_BYTES, *KINDS))
+        where = "c.sha is not null and coalesce(c.size, 0) <= ? and c.kind in (%s)" % marks
+        args = [MAX_BLOB_BYTES, *KINDS]
+        if since:
+            where += " and c.repo in (select full_name from repos where tree_at >= ?)"
+            args.append(since)
+        rows = c.execute(f"""select c.sha, c.repo, c.path, c.size, c.kind, coalesce(r.stars, 0) stars, coalesce(r.is_fork, 0) fork
+                             from components c left join repos r on r.full_name = c.repo where {where}""", args).fetchall()
+        best = {}
+        for r in rows:
+            k = (r["fork"], -r["stars"], r["repo"])
+            if r["sha"] not in best or k < best[r["sha"]][0]:
+                best[r["sha"]] = (k, r)
+        todo = [r for _, r in best.values()]
+        n = 0
+        for i in range(0, len(todo), 2000):
+            for r in todo[i:i + 2000]:
+                if c.execute("select 1 from blobs where sha=?", (r["sha"],)).fetchone():
+                    continue
+                cur = c.execute("insert or ignore into blob_queue(sha, repo, path, size, kind, stars, attempts, tried, status) "
+                                "values(?,?,?,?,?,?,0,'',null)", (r["sha"], r["repo"], r["path"], r["size"], r["kind"], r["stars"]))
+                n += cur.rowcount
+            c.commit()
+        c.execute("insert or replace into fetch_kv values('last_enqueue', ?)", (started,))
         c.commit()
-        self.log(f"enqueue: {c.execute('select count(*) from blob_queue').fetchone()[0] - before:,} new blobs queued")
+        self.log(f"enqueue: {n:,} new blobs queued" + (f" (repos listed since {since})" if since else ""))
 
     # ---------- parsing ----------
 
     FM_RE = re.compile(r"\A﻿?\s*---[ \t]*\r?\n(.*?)\r?\n---[ \t]*(?:\r?\n|\Z)", re.S)
 
     @staticmethod
+    def bounded(v, cap, depth=0):
+        """Flatten a YAML value to text without ever building more than `cap` characters.
+        YAML anchors and aliases can make a few hundred bytes expand to gigabytes."""
+        if depth > 8:
+            return "…"
+        if isinstance(v, dict):
+            out, n = [], 0
+            for k, x in v.items():
+                part = f"{k}: {Fetcher.bounded(x, cap - n, depth + 1)}"
+                out.append(part); n += len(part) + 2
+                if n >= cap:
+                    break
+            return "{" + ", ".join(out)[:cap] + "}"
+        if isinstance(v, (list, tuple)):
+            out, n = [], 0
+            for x in v:
+                part = Fetcher.bounded(x, cap - n, depth + 1)
+                out.append(part); n += len(part) + 2
+                if n >= cap:
+                    break
+            return ", ".join(out)[:cap]
+        return str(v)[: cap * 2]
+
+    @staticmethod
     def one_line(v, cap):
         if v is None:
             return None
-        if isinstance(v, (list, tuple)):
-            v = ", ".join(str(x) for x in v)
-        elif isinstance(v, dict):
-            v = json.dumps(v, ensure_ascii=False)
-        v = re.sub(r"\s+", " ", str(v)).strip()
+        if not isinstance(v, str):
+            v = Fetcher.bounded(v, cap)
+        v = re.sub(r"\s+", " ", v[: cap * 4]).strip()
         return v[:cap] or None
 
     def parse(self, kind, path, text):
@@ -144,7 +190,8 @@ class Fetcher:
         if m:
             body = text[m.end():]
             fm = None
-            if yaml:
+            raw_fm = m.group(1)
+            if yaml and len(raw_fm) <= 20000 and not re.search(r"(^|[\s\[,:-])\*[A-Za-z0-9_-]+", raw_fm):
                 try:
                     fm = yaml.safe_load(m.group(1))
                 except Exception:
@@ -156,8 +203,9 @@ class Fetcher:
                     if k:
                         fm[k.group(1)] = k.group(2).strip().strip("\"'")
             name, desc = self.one_line(fm.get("name"), 200), self.one_line(fm.get("description"), 2000)
-            try:
-                fm_json = json.dumps({str(k): self.one_line(v, 600) for k, v in fm.items()}, ensure_ascii=False)[:6000]
+            try:   # only the fields the list shows; the full frontmatter stays in the file text
+                fm_json = json.dumps({str(k): self.one_line(v, 300) for k, v in fm.items() if str(k) in FM_KEEP},
+                                     ensure_ascii=False)[:2000] or None
             except Exception:
                 fm_json = None
         for para in re.split(r"\n\s*\n", body[:6000]):
@@ -177,7 +225,7 @@ class Fetcher:
             "insert or replace into blobs(sha, kind, size, status, truncated, name, description, lead, fm, repo, path, fetched_at) "
             "values(?,?,?,?,?,?,?,?,?,?,?,?)",
             (sha, kind, size, "ok", int(bool(truncated)), name, desc, lead, fm, repo, path, now()))
-        self.con.execute("insert or replace into blob_text(sha, z) values(?,?)",
+        self.con.execute(f"insert or replace into {self.T}(sha, z) values(?,?)",
                          (sha, zlib.compress(text.encode("utf-8", "replace"), 6)))
 
     # ---------- GitHub ----------

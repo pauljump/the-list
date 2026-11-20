@@ -9,6 +9,7 @@ Run crawl/fetch_text.py first: skills, agents and commands take their descriptio
 """
 import csv
 import json
+import os
 import re
 import shutil
 import sqlite3
@@ -67,6 +68,10 @@ class Build:
     def __init__(self, db_path):
         self.con = sqlite3.connect(f"file:{db_path}?mode=ro", uri=True)
         self.con.row_factory = sqlite3.Row
+        text_db = os.environ.get("THE_LIST_TEXT_DB")   # file text kept in its own database
+        self.T = "txt.blob_text" if text_db else "blob_text"
+        if text_db:
+            self.con.execute("attach database ? as txt", (f"file:{quote(text_db)}?mode=ro",))
         self.repos = {}
         for r in self.con.execute("select full_name, description, stars, forks, is_fork, archived, license, pushed_at, "
                                   "created_at, topics, owner_type, homepage, status, n_components from repos"):
@@ -410,8 +415,8 @@ class Build:
     def mcp(self):
         groups = {}
         n_files = 0
-        for r in self.con.execute("""select c.repo, c.path, t.z from components c join blobs b on b.sha = c.sha
-                                     join blob_text t on t.sha = c.sha where c.kind = 'mcp' and b.status = 'ok'"""):
+        for r in self.con.execute(f"""select c.repo, c.path, t.z from components c join blobs b on b.sha = c.sha
+                                     join {self.T} t on t.sha = c.sha where c.kind = 'mcp' and b.status = 'ok'"""):
             n_files += 1
             try:
                 d = json.loads(zlib.decompress(r["z"]).decode("utf-8", "replace"))
@@ -502,8 +507,8 @@ class Build:
 
     def hooks(self):
         entries, n_files = [], 0
-        for r in self.con.execute("""select c.repo, c.path, c.kind, t.z, b.description from components c join blobs b on b.sha = c.sha
-                                     join blob_text t on t.sha = c.sha where c.kind in ('hook', 'settings') and b.status = 'ok'"""):
+        for r in self.con.execute(f"""select c.repo, c.path, c.kind, t.z, b.description from components c join blobs b on b.sha = c.sha
+                                     join {self.T} t on t.sha = c.sha where c.kind in ('hook', 'settings') and b.status = 'ok'"""):
             n_files += 1
             try:
                 d = json.loads(zlib.decompress(r["z"]).decode("utf-8", "replace"))
@@ -631,7 +636,10 @@ class Build:
         s = self.stats
         first, last = self.con.execute("select min(first_seen), max(tree_at) from repos").fetchone()
         crawl = f"{(first or '')[:10]} to {(last or '')[:10]}"
-        read = (self.con.execute("select max(fetched_at) from blobs").fetchone()[0] or "")[:10] if self.has_blobs else ""
+        try:
+            read = (self.con.execute("select max(fetched_at) from blobs").fetchone()[0] or "")[:10] if self.has_blobs else ""
+        except sqlite3.OperationalError:   # a trimmed build copy without the column
+            read = os.environ.get("THE_LIST_READ_DATE", "")
         queue = dict(self.con.execute("select coalesce(status,'pending'), count(*) from blob_queue group by 1").fetchall()) if self.has_blobs else {}
         rows = [("plugins", "Plugins", "entries of marketplace listings"), ("skills", "Skills", "`SKILL.md` files"),
                 ("agents", "Agents", "subagent definitions, `agents/*.md`"), ("commands", "Commands", "slash commands, `commands/*.md`"),
@@ -681,8 +689,8 @@ class Build:
         out.append(f"- **Plugins:** {st['rows']:,} marketplace entries, {st['entries']:,} after folding copies, {st['described']:,} with a description.\n")
         bs = s["repos"]["by_status"]
         out.append(f"- **Repos:** {s['repos']['seen']:,} seen, {bs.get('treed', 0) + bs.get('done', 0):,} opened, "
-                   f"{bs.get('gone', 0):,} already gone, {bs.get('resolved', 0) + bs.get('new', 0):,} MCP server repos "
-                   "kept for their description only.\n")
+                   f"{bs.get('gone', 0):,} already gone, {bs.get('resolved', 0) + bs.get('new', 0):,} found but not opened yet "
+                   "(the crawl is still running; about 4,000 of these are MCP server repos kept for their description only).\n")
         if queue.get("pending"):
             out.append(f"- **In progress:** {queue['pending']:,} files are still being read; this list will grow.\n")
         out.append("\nThe scripts that read the files and build these pages are in `crawl/` and `build.py`. "

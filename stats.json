@@ -1,24 +1,28 @@
 {
- "crawl": "2026-09-19 to 2026-11-13",
- "read": "2026-11-13",
+ "crawl": "2026-09-19 to 2026-11-20",
+ "read": "2026-11-20",
  "queue": {
-  "binary": 25,
+  "binary": 139,
+  "error": 701,
   "gone": 34986,
-  "ok": 1887558
+  "missing": 479,
+  "ok": 2143131,
+  "pending": 1582
  },
  "plugins": {
-  "entries": 113195,
-  "pages": 99,
+  "entries": 170385,
+  "pages": 143,
   "csv": [
-   "plugins.csv"
+   "plugins-1.csv",
+   "plugins-2.csv"
   ],
-  "rows": 135679,
-  "described": 101356,
-  "gone": 3539
+  "rows": 228220,
+  "described": 157891,
+  "gone": 6781
  },
  "skills": {
-  "entries": 938965,
-  "pages": 1116,
+  "entries": 1927044,
+  "pages": 2278,
   "csv": [
    "skills-1.csv",
    "skills-2.csv",
@@ -30,63 +34,76 @@
    "skills-8.csv",
    "skills-9.csv",
    "skills-10.csv",
-   "skills-11.csv"
+   "skills-11.csv",
+   "skills-12.csv",
+   "skills-13.csv",
+   "skills-14.csv",
+   "skills-15.csv",
+   "skills-16.csv",
+   "skills-17.csv",
+   "skills-18.csv",
+   "skills-19.csv",
+   "skills-20.csv",
+   "skills-21.csv"
   ],
-  "files": 1681040,
-  "unique": 1110772,
-  "read": 1091894,
-  "described": 937588
+  "files": 5240073,
+  "unique": 2451085,
+  "read": 2417818,
+  "described": 1922160
  },
  "agents": {
-  "entries": 173382,
-  "pages": 198,
+  "entries": 297057,
+  "pages": 329,
   "csv": [
    "agents-1.csv",
-   "agents-2.csv"
+   "agents-2.csv",
+   "agents-3.csv"
   ],
-  "files": 300619,
-  "unique": 212078,
-  "read": 206286,
-  "described": 172232
+  "files": 615961,
+  "unique": 373352,
+  "read": 365439,
+  "described": 293255
  },
  "commands": {
-  "entries": 166738,
-  "pages": 128,
+  "entries": 238286,
+  "pages": 182,
   "csv": [
    "commands-1.csv",
    "commands-2.csv"
   ],
-  "files": 271362,
-  "unique": 185850,
-  "read": 182099,
-  "described": 166092
+  "files": 458028,
+  "unique": 273119,
+  "read": 268753,
+  "described": 237079
  },
  "mcp-servers": {
-  "entries": 19901,
-  "pages": 27,
+  "entries": 31791,
+  "pages": 31,
   "csv": [
    "mcp-servers.csv"
   ],
-  "files": 21405,
-  "directory": 4298
+  "files": 41163,
+  "directory": 4260
  },
  "hooks": {
-  "entries": 51124,
-  "pages": 40,
+  "entries": 81160,
+  "pages": 59,
   "csv": [
    "hooks.csv"
   ],
-  "files": 67549
+  "files": 124268
  },
  "repos": {
-  "entries": 100432,
-  "seen": 130072,
+  "entries": 189756,
+  "seen": 322396,
   "by_status": {
-   "treed": 110853,
-   "gone": 16106,
-   "done": 45,
-   "empty": 45,
-   "resolved": 3023
+   "treed": 208620,
+   "gone": 19337,
+   "done": 20,
+   "empty": 150,
+   "resolved": 75869,
+   "skipped": 17267,
+   "new": 1133
   }
  }
 }
