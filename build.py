@@ -68,16 +68,45 @@ class Build:
     def __init__(self, db_path):
         self.con = sqlite3.connect(f"file:{db_path}?mode=ro", uri=True)
         self.con.row_factory = sqlite3.Row
-        text_db = os.environ.get("THE_LIST_TEXT_DB")   # file text kept in its own database
+        # Optional split layout: THE_LIST_READER_DB holds blobs and blob_queue; THE_LIST_TEXT_DB holds the file text,
+        # in blob_text (indexed) and blob_text_log (append-only, unindexed).
+        reader_db = os.environ.get("THE_LIST_READER_DB")
+        text_db = os.environ.get("THE_LIST_TEXT_DB")
+        if reader_db:   # attached first, so unqualified blobs / blob_queue resolve here
+            self.con.execute("attach database ? as rdr", (f"file:{quote(reader_db)}?mode=ro",))
         self.T = "txt.blob_text" if text_db else "blob_text"
+        self.has_log = False
         if text_db:
             self.con.execute("attach database ? as txt", (f"file:{quote(text_db)}?mode=ro",))
+            self.has_log = bool(self.con.execute(
+                "select 1 from txt.sqlite_master where name='blob_text_log'").fetchone())
         self.repos = {}
         for r in self.con.execute("select full_name, description, stars, forks, is_fork, archived, license, pushed_at, "
                                   "created_at, topics, owner_type, homepage, status, n_components from repos"):
             self.repos[r["full_name"].lower()] = r
         self.stats = {}
-        self.has_blobs = bool(self.con.execute("select 1 from sqlite_master where name='blobs'").fetchone())
+        try:   # blobs may sit in the attached text database
+            self.con.execute("select 1 from blobs limit 1")
+            self.has_blobs = True
+        except sqlite3.OperationalError:
+            self.has_blobs = False
+
+    def texts(self, shas):
+        """sha -> compressed text, from the indexed table, then one in-order pass over the append-only log."""
+        out, want = {}, set(shas)
+        for sha in list(want):
+            r = self.con.execute(f"select z from {self.T} where sha=?", (sha,)).fetchone()
+            if r:
+                out[sha] = r[0]
+        want -= out.keys()
+        if want and self.has_log:
+            for sha, z in self.con.execute("select sha, z from txt.blob_text_log"):
+                if sha in want:
+                    out[sha] = z
+                    want.discard(sha)
+                    if not want:
+                        break
+        return out
 
     def meta(self, repo):
         r = self.repos.get((repo or "").lower())
@@ -415,8 +444,11 @@ class Build:
     def mcp(self):
         groups = {}
         n_files = 0
-        for r in self.con.execute(f"""select c.repo, c.path, t.z from components c join blobs b on b.sha = c.sha
-                                     join {self.T} t on t.sha = c.sha where c.kind = 'mcp' and b.status = 'ok'"""):
+        rows = self.con.execute("""select c.repo, c.path, c.sha from components c join blobs b on b.sha = c.sha
+                                   where c.kind = 'mcp' and b.status = 'ok'""").fetchall()
+        z = self.texts({r["sha"] for r in rows})
+        rows = [{"repo": r["repo"], "path": r["path"], "z": z[r["sha"]]} for r in rows if r["sha"] in z]
+        for r in rows:
             n_files += 1
             try:
                 d = json.loads(zlib.decompress(r["z"]).decode("utf-8", "replace"))
@@ -507,8 +539,12 @@ class Build:
 
     def hooks(self):
         entries, n_files = [], 0
-        for r in self.con.execute(f"""select c.repo, c.path, c.kind, t.z, b.description from components c join blobs b on b.sha = c.sha
-                                     join {self.T} t on t.sha = c.sha where c.kind in ('hook', 'settings') and b.status = 'ok'"""):
+        rows = self.con.execute("""select c.repo, c.path, c.kind, c.sha, b.description from components c join blobs b on b.sha = c.sha
+                                   where c.kind in ('hook', 'settings') and b.status = 'ok'""").fetchall()
+        z = self.texts({r["sha"] for r in rows})
+        rows = [{"repo": r["repo"], "path": r["path"], "kind": r["kind"], "description": r["description"], "z": z[r["sha"]]}
+                for r in rows if r["sha"] in z]
+        for r in rows:
             n_files += 1
             try:
                 d = json.loads(zlib.decompress(r["z"]).decode("utf-8", "replace"))
@@ -580,25 +616,48 @@ class Build:
         rows = [r for r in self.repos.values() if r["status"] in ("treed", "done")
                 and any(counts[r["full_name"].lower()].get(k) for k in holds)]
         rows.sort(key=lambda r: (-(r["stars"] or 0), r["full_name"].lower()))
-        with open(OUT / "repos.csv", "w", newline="", encoding="utf-8") as f:
-            w = csv.writer(f)
-            w.writerow(["repo", "description", "stars", "forks", "license", "owner_type", "created", "last_pushed", "is_fork",
-                        "archived", "topics", "homepage", "plugins_listed", "skills", "commands", "agents", "hook_files",
-                        "mcp_configs", "has_marketplace", "has_claude_md"])
+        d = OUT / "repos"
+        if d.exists():
+            shutil.rmtree(d)
+        d.mkdir()
+        head = ["repo", "description", "stars", "forks", "license", "owner_type", "created", "last_pushed", "is_fork",
+                "archived", "topics", "homepage", "plugins_listed", "skills", "commands", "agents", "hook_files",
+                "mcp_configs", "has_marketplace", "has_claude_md"]
+        parts, f, w, size = [], None, None, 0
+        try:
             for r in rows:
                 c = counts[r["full_name"].lower()]
                 try:
                     topics = ", ".join(json.loads(r["topics"] or "[]"))
                 except ValueError:
                     topics = ""
-                w.writerow([r["full_name"], clip(clean(r["description"]), 400), r["stars"] or 0, r["forks"] or 0, r["license"] or "",
-                            r["owner_type"] or "", (r["created_at"] or "")[:10], (r["pushed_at"] or "")[:10],
-                            "yes" if r["is_fork"] else "", "yes" if r["archived"] else "", topics, clean(r["homepage"])[:200],
-                            listed.get(r["full_name"].lower(), 0), c["skill"], c["command"], c["agent"], c["hook"], c["mcp"],
-                            "yes" if c["marketplace"] else "", "yes" if c["claude-md"] else ""])
+                cells = [r["full_name"], clip(clean(r["description"]), 400), r["stars"] or 0, r["forks"] or 0, r["license"] or "",
+                         r["owner_type"] or "", (r["created_at"] or "")[:10], (r["pushed_at"] or "")[:10],
+                         "yes" if r["is_fork"] else "", "yes" if r["archived"] else "", topics, clean(r["homepage"])[:200],
+                         listed.get(r["full_name"].lower(), 0), c["skill"], c["command"], c["agent"], c["hook"], c["mcp"],
+                         "yes" if c["marketplace"] else "", "yes" if c["claude-md"] else ""]
+                n = sum(len(str(x).encode("utf-8")) + 3 for x in cells)
+                if f is None or size + n > CSV_BYTES:   # GitHub rejects files over 100 MB
+                    if f:
+                        f.close()
+                    parts.append(d / f"repos-{len(parts) + 1}.csv")
+                    f = open(parts[-1], "w", newline="", encoding="utf-8")
+                    w = csv.writer(f)
+                    w.writerow(head)
+                    size = 0
+                w.writerow(cells)
+                size += n
+        finally:
+            if f:
+                f.close()
         by_status = defaultdict(int)
         for r in self.repos.values():
             by_status[r["status"]] += 1
+        (d / "README.md").write_text(
+            f"# Repos\n\n{len(rows):,} repos that hold at least one plugin, marketplace, skill, agent, command, hook or MCP "
+            "config, most-starred first.\n\n## Get it\n\n"
+            + "".join(f"- [`{p.name}`]({p.name}) ({p.stat().st_size / 1e6:.0f} MB)\n" for p in parts)
+            + "\nColumns: " + ", ".join(f"`{c}`" for c in head) + ".\n", encoding="utf-8")
         self.stats["repos"] = {"entries": len(rows), "seen": len(self.repos), "by_status": dict(by_status)}
 
     # ---------- top + readme ----------
@@ -652,7 +711,7 @@ class Build:
         for key, title, what in rows:
             if key in s:
                 out.append(f"| [{title}]({key}/) | {s[key]['entries']:,} | {what} |\n")
-        out.append(f"| [Repos](repos.csv) | {s['repos']['entries']:,} | every repo that holds any of the above |\n\n")
+        out.append(f"| [Repos](repos/) | {s['repos']['entries']:,} | every repo that holds any of the above |\n\n")
         out += ["Start with [TOP.md](TOP.md) for the most installed and most copied.\n\n",
                 "## How to use it\n\n",
                 "- **Read it:** each folder has alphabetical pages that GitHub can show, indexed in the folder's README.\n",
@@ -675,7 +734,8 @@ class Build:
                 "- Not reviewed. Nothing here was run or checked, and being listed is not a recommendation. "
                 "Plugins and hooks run code on your machine; read them first.\n",
                 "- Not live. It is a snapshot, and some repos have since moved or gone.\n",
-                "- Not everything. Private repos, and public ones the searches missed, are not here.\n",
+                "- Not everything. Private repos, and public ones the searches missed, are not here. GitHub's search returns "
+                "at most 1,000 results per query, so files in crowded sizes were not all reachable.\n",
                 "- Email addresses and anything that looked like a key were removed from descriptions.\n\n",
                 "## Numbers\n\n"]
         for key, title, _ in rows:
@@ -701,7 +761,7 @@ class Build:
 
 def main(db_path):
     b = Build(db_path)
-    for old in ("the-list.csv", "the-list.md", "list"):   # the first layout
+    for old in ("the-list.csv", "the-list.md", "list", "repos.csv"):   # the first layout
         p = OUT / old
         if p.is_dir():
             shutil.rmtree(p)

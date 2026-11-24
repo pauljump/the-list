@@ -52,15 +52,25 @@ class Fetcher:
         self.dir = Path(db_path).resolve().parent
         self.log_path = self.dir / "logs" / "fetch_text.log"
         self.log_path.parent.mkdir(exist_ok=True)
-        self.con = sqlite3.connect(db_path, timeout=120)
+        self.con = sqlite3.connect(db_path, timeout=600)
         self.con.row_factory = sqlite3.Row
-        self.con.execute("pragma busy_timeout=120000")
+        self.con.execute("pragma busy_timeout=600000")   # a slow drive: wait out a lock rather than crash
+        self.con.execute("pragma cache_size=-65536")
         self.con.execute("pragma synchronous=normal")
         # the file text can live in its own database (on a big, slow disk) while the metadata stays on a fast one
+        # Optional split: THE_LIST_READER_DB holds blobs, blob_queue, fetch_kv (fast disk); THE_LIST_TEXT_DB holds the
+        # file text. With THE_LIST_TEXT_LOG=1 new text is appended to txt.blob_text_log, which a slow disk writes in order.
+        reader_db = os.environ.get("THE_LIST_READER_DB")
         text_db = os.environ.get("THE_LIST_TEXT_DB")
+        if reader_db:   # attached first, so unqualified blobs / blob_queue / fetch_kv resolve here
+            self.con.execute("attach database ? as rdr", (reader_db,))
         if text_db:
             self.con.execute("attach database ? as txt", (text_db,))
-        self.T = "txt.blob_text" if text_db else "blob_text"
+        self.log_text = bool(text_db) and os.environ.get("THE_LIST_TEXT_LOG") == "1"
+        self.T = ("txt.blob_text_log" if self.log_text else "txt.blob_text") if text_db else "blob_text"
+        self.X = "rdr." if reader_db else ("txt." if text_db else "")
+        if self.log_text:
+            self.con.execute("create table if not exists txt.blob_text_log(sha text, z blob)")
         self.call_blobs = CALL_BLOBS
 
     def log(self, msg):
@@ -107,7 +117,7 @@ class Fetcher:
         """Queue the shas of components that a later tree pass found. Reads first, writes in small batches,
         so other writers sharing the database are never locked out for long."""
         c = self.con
-        c.execute("create table if not exists fetch_kv(k text primary key, v text)")
+        c.execute(f"create table if not exists {self.X}fetch_kv(k text primary key, v text)")
         since = None if full else (c.execute("select v from fetch_kv where k='last_enqueue'").fetchone() or [None])[0]
         started = now()
         marks = ",".join("?" * len(KINDS))
@@ -225,7 +235,7 @@ class Fetcher:
             "insert or replace into blobs(sha, kind, size, status, truncated, name, description, lead, fm, repo, path, fetched_at) "
             "values(?,?,?,?,?,?,?,?,?,?,?,?)",
             (sha, kind, size, "ok", int(bool(truncated)), name, desc, lead, fm, repo, path, now()))
-        self.con.execute(f"insert or replace into {self.T}(sha, z) values(?,?)",
+        self.con.execute(f"{'insert' if self.log_text else 'insert or replace'} into {self.T}(sha, z) values(?,?)",
                          (sha, zlib.compress(text.encode("utf-8", "replace"), 6)))
 
     # ---------- GitHub ----------
