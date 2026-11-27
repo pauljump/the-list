@@ -1,181 +1,185 @@
 # Plugins
 
-187,380 Claude Code plugins: every entry of every `.claude-plugin/marketplace.json` the crawl found, with what it does, where it lives and what is inside it.
+193,501 Claude Code plugins: every entry of every `.claude-plugin/marketplace.json` the crawl found, with what it does, where it lives and what is inside it.
 
 ## Get it
 
 - [`plugins-1.csv`](plugins-1.csv) (41 MB)
-- [`plugins-2.csv`](plugins-2.csv) (26 MB)
+- [`plugins-2.csv`](plugins-2.csv) (28 MB)
 
 Columns: `name`, `description`, `category`, `keywords`, `version`, `repo`, `url`, `stars`, `license`, `last_pushed`, `skills`, `commands`, `agents`, `hook_files`, `mcp_configs`, `marketplace_repo`, `marketplace_name`, `marketplaces`, `copies`, `repo_gone`.
 
 ## Notes
 
-- Built from 257,759 marketplace entries. A plugin listed in several marketplaces appears once; copies with the same name and description under other repos (forks, mirrors) are folded into the original (`copies`).
-- 174,700 have a description, in the author's words, cut at 600 characters. 6,852 of those were blank in the marketplace and filled from the plugin's own `plugin.json` or its repo description.
+- Built from 268,663 marketplace entries. A plugin listed in several marketplaces appears once; copies with the same name and description under other repos (forks, mirrors) are folded into the original (`copies`).
+- 180,686 have a description, in the author's words, cut at 600 characters. 7,080 of those were blank in the marketplace and filled from the plugin's own `plugin.json` or its repo description.
 - `skills`, `commands`, `agents`, `hook_files`, `mcp_configs` count the files found under the plugin's folder.
 - To install one: `/plugin marketplace add <marketplace_repo>` then `/plugin install <name>@<marketplace_name>`.
-- 6,759 point at a repo that was already deleted or renamed at crawl time (`repo_gone`).
+- 6,808 point at a repo that was already deleted or renamed at crawl time (`repo_gone`).
 - `stars`, `license` and `last_pushed` belong to the repo, not the plugin.
 
 ## Browse
 
-- [0-9-001](0-9-001.md): 603 entries, ${name} to 通用技能
-- [a-001](a-001.md): 1,314 entries, a to ade
-- [a-002](a-002.md): 1,269 entries, ade to agent-browser
-- [a-003](a-003.md): 1,302 entries, agent-browser to agent-redteam
-- [a-004](a-004.md): 1,302 entries, agent-redteam-kit to agentic-engineering-workflow
-- [a-005](a-005.md): 1,318 entries, agentic-engineering-workflow to ai-berkshire
-- [a-006](a-006.md): 1,268 entries, ai-berkshire to ai-writing-cleanup
-- [a-007](a-007.md): 1,315 entries, ai-writing-plugin to all-skills
-- [a-008](a-008.md): 1,234 entries, all-skills to android-emulator-skill
-- [a-009](a-009.md): 1,233 entries, android-engage-sdk-integration to api-auth-better-auth-drizzle-hono
-- [a-010](a-010.md): 1,224 entries, api-auth-clerk to apple-tv-dev
-- [a-011](a-011.md): 1,247 entries, apple-ui-craft to arrakis-careers
-- [a-012](a-012.md): 1,294 entries, arrakis-secret-redactor to atdd
-- [a-013](a-013.md): 1,305 entries, atdd to automatic-model-router
-- [a-014](a-014.md): 1,282 entries, automatic-stateful-prompt-improver to azure-com-azure-com-azsadmin-acquisitions
-- [a-015](a-015.md): 609 entries, azure-com-azure-com-azsadmin-actionplan to azzist
-- [b-001](b-001.md): 1,340 entries, b to beacon
-- [b-002](b-002.md): 1,315 entries, beacon to birdwatch
-- [b-003](b-003.md): 1,303 entries, birlesme-devralma-ma to bootstrap-marketing
-- [b-004](b-004.md): 1,340 entries, bootstrap-operations to browser-fetch-router
-- [b-005](b-005.md): 1,281 entries, browser-for-ai to bzhn-skills
-- [c-001](c-001.md): 1,348 entries, c to careerdocs
-- [c-002](c-002.md): 1,366 entries, CareerExpert to ccwatch
-- [c-003](c-003.md): 1,329 entries, ccwatch to chiche
-- [c-004](c-004.md): 1,288 entries, chichex-skills to Claude Code Toolchain
-- [c-005](c-005.md): 1,304 entries, Claude Code Toolkit to claude-jam
-- [c-006](c-006.md): 1,319 entries, claude-jarvis to claudehut
-- [c-007](c-007.md): 1,362 entries, claudeignore to cloud-devops
-- [c-008](c-008.md): 1,318 entries, cloud-devops to code-quality
-- [c-009](c-009.md): 1,365 entries, code-quality to codex-paired-superpowers
-- [c-010](c-010.md): 1,340 entries, codex-pane to common-room
-- [c-011](c-011.md): 1,240 entries, common-room to confluence-best-practices
-- [c-012](c-012.md): 1,261 entries, confluence-cli to context-watch
-- [c-013](c-013.md): 1,340 entries, context-watch to cortex-testing
-- [c-014](c-014.md): 1,290 entries, cortex-toolkit to creek
-- [c-015](c-015.md): 1,299 entries, creek to cursor-bridge
-- [c-016](c-016.md): 551 entries, cursor-build-intro to czsc-chan-theory
-- [d-001](d-001.md): 1,362 entries, d to dataforce
-- [d-002](d-002.md): 1,270 entries, dataforge to deep-a11y-web-skills
-- [d-003](d-003.md): 1,302 entries, deep-adr to deployment-composer
-- [d-004](d-004.md): 1,271 entries, deployment-engineer to deusproof
-- [d-005](d-005.md): 1,254 entries, deutero to devflow
-- [d-006](d-006.md): 1,214 entries, devflow to dig
-- [d-007](d-007.md): 1,292 entries, dig to docker-pane
-- [d-008](d-008.md): 1,345 entries, docker-panel to dotnet-harness
-- [d-009](d-009.md): 1,317 entries, dotnet-helix to dynatrace-dashboards
-- [d-010](d-010.md): 17 entries, dynatrace-kpi-dashboard-generator to dzialki
-- [e-001](e-001.md): 1,292 entries, e-colleagues to elite-ts
-- [e-002](e-002.md): 1,233 entries, elite-ts to english
-- [e-003](e-003.md): 1,304 entries, English Learning Tools to europarecht-kompass
-- [e-004](e-004.md): 1,306 entries, european-portuguese to expo-developer
-- [e-005](e-005.md): 207 entries, expo-device-matrix to ezyplatform
-- [f-001](f-001.md): 1,150 entries, f-awesome-chatgpt-prompts-1 to fastrmemory
-- [f-002](f-002.md): 1,311 entries, fastspring-webhooks to finance
-- [f-003](f-003.md): 1,381 entries, finance to flotilla-hooks
-- [f-004](f-004.md): 1,365 entries, flow to forgeplan-map-pack
-- [f-005](f-005.md): 1,327 entries, forgeplan-orchestra to frontier-orchestrator
-- [f-006](f-006.md): 638 entries, frontier-sandbox to fzymgc-house-fzymgc-house-skills
-- [g-001](g-001.md): 1,361 entries, g to generate-image
-- [g-002](g-002.md): 1,356 entries, generate-image to git-guards
-- [g-003](g-003.md): 1,371 entries, git-gud to glean-memory
-- [g-004](g-004.md): 1,377 entries, glean-notify to google-tag-manager-cli
-- [g-005](g-005.md): 1,307 entries, google-tagmanager to grok-bot
-- [g-006](g-006.md): 1,074 entries, grok-bot-creation to gzsm
-- [h-001](h-001.md): 1,321 entries, h to harnist
-- [h-002](h-002.md): 1,373 entries, harnmem to hint-echo
-- [h-003](h-003.md): 1,289 entries, hint-health-webhooks to hr-onboarding
-- [h-004](h-004.md): 1,294 entries, hr-onboarding-email-approval to hyrex-iot-cognitum
-- [h-005](h-005.md): 25 entries, hyrex-jujutsu to hzt
-- [i-001](i-001.md): 1,308 entries, i to imprimatur
-- [i-002](i-002.md): 1,210 entries, imprint to insurance
-- [i-003](i-003.md): 1,283 entries, insurance to issue-drafter
-- [i-004](i-004.md): 362 entries, issue-driven-development to izumo
-- [j-001](j-001.md): 1,365 entries, j-flow to jj-agent
-- [j-002](j-002.md): 1,336 entries, jj-agents to jz-tanstack-ship
-- [k-001](k-001.md): 1,235 entries, k-deal-skill to kicad
-- [k-002](k-002.md): 1,330 entries, kicad to kubernetes
-- [k-003](k-003.md): 235 entries, kubernetes to kz-marketing
-- [l-001](l-001.md): 1,309 entries, l-lawliet to lean-changes
-- [l-002](l-002.md): 1,295 entries, lean-cloud-backtest to license-plate-recognizer
-- [l-003](l-003.md): 1,306 entries, license-plate-recognizer to lizenzvertragsersteller
-- [l-004](l-004.md): 1,334 entries, lizenzvertragsersteller to loom
-- [l-005](l-005.md): 899 entries, loom to lzrc-theme
-- [m-001](m-001.md): 1,292 entries, m to maqami-travel
-- [m-002](m-002.md): 1,281 entries, maquetador-academico to math-rotation
-- [m-003](m-003.md): 1,380 entries, math-science-programming to medical-codes-mcp-server
-- [m-004](m-004.md): 1,323 entries, medical-device-software to meta-authoring
-- [m-005](m-005.md): 1,288 entries, meta-automation-architect to mirrors-cursor
-- [m-006](m-006.md): 1,294 entries, mirrors-effective-html to model-search
-- [m-007](m-007.md): 1,335 entries, model-selection to mtor-atlas
-- [m-008](m-008.md): 1,014 entries, mtpy to mzizzi-ty-lsp
-- [n-001](n-001.md): 1,274 entries, n to neural-seam
-- [n-002](n-002.md): 1,330 entries, neural-system-map to node-express-pro
-- [n-003](n-003.md): 1,376 entries, node-express-stress-test to nyxid
-- [n-004](n-004.md): 33 entries, nyxid to nzyme
-- [o-001](o-001.md): 1,343 entries, o to okt-agents
-- [o-002](o-002.md): 1,321 entries, okta-api-reference to openapi-expert
-- [o-003](o-003.md): 1,310 entries, openapi-expert to orch8
-- [o-004](o-004.md): 1,280 entries, orch8 to oxidise
-- [o-005](o-005.md): 37 entries, oxidize to ozzit
-- [p-001](p-001.md): 1,327 entries, p to patient-advocate
-- [p-002](p-002.md): 1,289 entries, patient-options-report to personal
-- [p-003](p-003.md): 1,322 entries, personal to pitroom
-- [p-004](p-004.md): 1,332 entries, pitstop to plop
-- [p-005](p-005.md): 1,371 entries, plop-zh to polaris
-- [p-006](p-006.md): 1,299 entries, polaris to pr-comment-resolver
-- [p-007](p-007.md): 1,308 entries, pr-comment-resolver to prism
-- [p-008](p-008.md): 1,192 entries, prism to professional-kanban
-- [p-009](p-009.md): 1,266 entries, professional-output to prompt-polish
-- [p-010](p-010.md): 1,287 entries, prompt-polish to pulse
-- [p-011](p-011.md): 846 entries, pulse to pzmap
-- [q-001](q-001.md): 1,213 entries, q to quickwit-oss-tantivy-1
-- [q-002](q-002.md): 272 entries, quiescent to qyrusai-assure
-- [r-001](r-001.md): 1,344 entries, r to react-rules
-- [r-002](r-002.md): 1,303 entries, react-rules-plugin to reference-data-mcp-server
-- [r-003](r-003.md): 1,341 entries, reference-driven-3d-character to repo-hunter
-- [r-004](r-004.md): 1,256 entries, repo-hygiene to resume
-- [r-005](r-005.md): 1,318 entries, resume to ripple-hud
-- [r-006](r-006.md): 1,320 entries, ripple-plugin to ruflo-bbs-federation
-- [r-007](r-007.md): 715 entries, ruflo-bbs-federation to rzpro
-- [s-001](s-001.md): 1,229 entries, s to say-plugin
-- [s-002](s-002.md): 1,244 entries, say-summary to sdd
-- [s-003](s-003.md): 1,291 entries, sdd to security-colleague
-- [s-004](s-004.md): 1,282 entries, security-compliance to seo-geo
-- [s-005](s-005.md): 1,328 entries, seo-geo to setu-bharat-connect-billpay
-- [s-006](s-006.md): 1,331 entries, setuhq to Shopify Payments Apps
-- [s-007](s-007.md): 1,323 entries, Shopify Polaris App Home to sketchtools-mcp
-- [s-008](s-008.md): 1,311 entries, SketchUp Model Protocol to skill-management
-- [s-009](s-009.md): 1,377 entries, skill-management to skillwiki-3
-- [s-010](s-010.md): 1,360 entries, skillworks to social-media-manager
-- [s-011](s-011.md): 1,259 entries, social-media-manager to speaktojade-nclaude
-- [s-012](s-012.md): 1,299 entries, spearit-framework to sql-safety
-- [s-013](s-013.md): 1,355 entries, sql-safety-net to ste-mode
-- [s-014](s-014.md): 1,295 entries, ste-pro-max to style-switcher
-- [s-015](s-015.md): 1,308 entries, style-tripwire to surface
-- [s-016](s-016.md): 1,328 entries, surface to system-doctor
-- [s-017](s-017.md): 148 entries, system-error-handling-strategy to sztwiorok-buddy-plugin
-- [t-001](t-001.md): 1,366 entries, t to td-crm-pdca-automation
-- [t-002](t-002.md): 1,287 entries, td-engage-studio-analytics-builder to tenuo
-- [t-003](t-003.md): 1,350 entries, tenured to theme-builder
-- [t-004](t-004.md): 1,355 entries, theme-cli to tirion
-- [t-005](t-005.md): 1,448 entries, tirno to toon-mcp-squeeze
-- [t-006](t-006.md): 1,288 entries, toon-openapi-agent to triple-a-crew
-- [t-007](t-007.md): 1,357 entries, triple-extract to typo3-typoscript-ref
-- [t-008](t-008.md): 33 entries, typo3-upgrade-effort-model to Tzurot Deployment Guide
-- [u-001](u-001.md): 1,298 entries, u to Unmet Requirements to Issues
-- [u-002](u-002.md): 1,346 entries, unmik-regulation-64-panels-jeanne-sulzer to ux-test
-- [u-003](u-003.md): 53 entries, ux-tips to uzfintech
-- [v-001](v-001.md): 1,266 entries, v to viam-skills
-- [v-002](v-002.md): 1,306 entries, viam-typescript to vitola-skills
-- [v-003](v-003.md): 1,002 entries, vitozev-skills to vz-skills
-- [w-001](w-001.md): 1,333 entries, W&B Plot Skill to web3-agent-browser
-- [w-002](w-002.md): 1,319 entries, web3-audit-response-toolkit to windows-shell
-- [w-003](w-003.md): 1,292 entries, windows-shell-rules-en to working-on-an-epic
-- [w-004](w-004.md): 1,342 entries, working-on-an-issue to wtt-trend-radar-skills
-- [w-005](w-005.md): 59 entries, wtt-video-director-skills to wzrd
-- [x-001](x-001.md): 861 entries, x to xyo-skills
-- [y-001](y-001.md): 888 entries, y to yzmir-training-optimization
-- [z-001](z-001.md): 900 entries, z to zzzz-fleet-kit
+- [0-9-001](0-9-001.md): 615 entries, ${name} to 通用技能
+- [a-001](a-001.md): 1,307 entries, a to add-scrut-cli-tests-2
+- [a-002](a-002.md): 1,269 entries, add-serena to agent-bell
+- [a-003](a-003.md): 1,313 entries, agent-bemfa-notify to agent-plugin-authoring
+- [a-004](a-004.md): 1,312 entries, agent-plugin-authoring to agentic-architecture-review
+- [a-005](a-005.md): 1,319 entries, agentic-architecture-skills to AI Agent Prompts
+- [a-006](a-006.md): 1,273 entries, AI Agent Setup to ai-seo
+- [a-007](a-007.md): 1,294 entries, ai-seo to alanshaoskill
+- [a-008](a-008.md): 1,283 entries, alarm to analyse-parallel-bugs
+- [a-009](a-009.md): 1,222 entries, analyse-prompt to antijank
+- [a-010](a-010.md): 1,214 entries, antimetal to App Store Connect
+- [a-011](a-011.md): 1,261 entries, App Store Connect CLI to archive-conversation
+- [a-012](a-012.md): 1,273 entries, archive-first to ask-your-research
+- [a-013](a-013.md): 1,311 entries, ask4me to auplc
+- [a-014](a-014.md): 1,312 entries, aur to aws-cert-study-planner
+- [a-015](a-015.md): 1,152 entries, aws-cli to azure-modernization
+- [a-016](a-016.md): 54 entries, azure-monitor to azzist
+- [b-001](b-001.md): 1,343 entries, b to bdd-dotnet
+- [b-002](b-002.md): 1,321 entries, bdd-e2e-tester to biome-lsp
+- [b-003](b-003.md): 1,306 entries, biome-validator to bookbank
+- [b-004](b-004.md): 1,340 entries, bookbot-blog to broadcast
+- [b-005](b-005.md): 1,321 entries, broadcast to buyer-creative-management
+- [b-006](b-006.md): 157 entries, buyer-intent-lead-finder to bzhn-skills
+- [c-001](c-001.md): 1,357 entries, c to career-evidence
+- [c-002](c-002.md): 1,363 entries, career-fair-prep to ccplugins-awesome-claude-code-plugins
+- [c-003](c-003.md): 1,336 entries, ccpm to checkpoint
+- [c-004](c-004.md): 1,276 entries, checkpoint to clarity-skill
+- [c-005](c-005.md): 1,311 entries, clarity-theme to claude-frontforge
+- [c-006](c-006.md): 1,317 entries, claude-fulcrum to claude-utils
+- [c-007](c-007.md): 1,385 entries, claude-utils to clio-scientific-io
+- [c-008](c-008.md): 1,341 entries, clio-scientific-io-skills to code-compliance-review
+- [c-009](c-009.md): 1,345 entries, code-comprehension to codex--cb-insights
+- [c-010](c-010.md): 1,354 entries, codex--channel99 to comment-limerick
+- [c-011](c-011.md): 1,257 entries, comment-loop to computer-hardware-and-data-centers
+- [c-012](c-012.md): 1,263 entries, computer-hardware-engineer to context-docs
+- [c-013](c-013.md): 1,322 entries, context-docs-kit to core
+- [c-014](c-014.md): 1,331 entries, core to crashlytics
+- [c-015](c-015.md): 1,248 entries, crashlytics to cs2-headset-eq
+- [c-016](c-016.md): 1,117 entries, cs2-modding to czsc-chan-theory
+- [d-001](d-001.md): 1,363 entries, d to datadog-mcp
+- [d-002](d-002.md): 1,268 entries, datadog-metrics-investigator-skill to decocms-ui
+- [d-003](d-003.md): 1,304 entries, decode to deploy
+- [d-004](d-004.md): 1,280 entries, deploy to deslop
+- [d-005](d-005.md): 1,269 entries, deslop to development-agents
+- [d-006](d-006.md): 1,192 entries, development-claude-plugin to diamondnode-core
+- [d-007](d-007.md): 1,300 entries, diamondnode-mcp-integration to doc-maker
+- [d-008](d-008.md): 1,335 entries, doc-manager to doppler
+- [d-009](d-009.md): 1,339 entries, doppler-webhooks to duet
+- [d-010](d-010.md): 292 entries, duet to dzialki
+- [e-001](e-001.md): 1,286 entries, e-colleagues to elevenlabs-tts
+- [e-002](e-002.md): 1,255 entries, elevenlabs-tts to engineering-sre-zh
+- [e-003](e-003.md): 1,326 entries, engineering-standards to etoro-context-tracker
+- [e-004](e-004.md): 1,280 entries, etoro-de-analytical to explain-this-change
+- [e-005](e-005.md): 367 entries, explain-u-value to ezyplatform
+- [f-001](f-001.md): 1,052 entries, f-awesome-chatgpt-prompts-1 to fal-ai-master
+- [f-002](f-002.md): 1,320 entries, fal-butler to figma-to-web
+- [f-003](f-003.md): 1,373 entries, figma-tools to flaky-test-finder
+- [f-004](f-004.md): 1,385 entries, flaky-test-triage to forecast-calibration-audit
+- [f-005](f-005.md): 1,315 entries, forecast-project-delivery to friendly-human
+- [f-006](f-006.md): 1,123 entries, friendly-reminder to fzymgc-house-fzymgc-house-skills
+- [g-001](g-001.md): 1,360 entries, g to general-skills
+- [g-002](g-002.md): 1,359 entries, general-skills to git-flow
+- [g-003](g-003.md): 1,371 entries, git-flow to glados-output-style
+- [g-004](g-004.md): 1,392 entries, glaim to google-drive
+- [g-005](g-005.md): 1,290 entries, google-drive to grill-with-docs
+- [g-006](g-006.md): 1,263 entries, grill-with-docs to gzsm
+- [h-001](h-001.md): 1,324 entries, h to harness-thrift-cursor
+- [h-002](h-002.md): 1,381 entries, harness-thrift-gemini to hikyaku
+- [h-003](h-003.md): 1,333 entries, hilbana to hr-coordination
+- [h-004](h-004.md): 1,252 entries, hr-crisis-management to hyperframes-axonometric
+- [h-005](h-005.md): 157 entries, hyperframes-by-heygen to hzt
+- [i-001](i-001.md): 1,311 entries, i to implementer
+- [i-002](i-002.md): 1,224 entries, implementer-agent to instantly-pack-2
+- [i-003](i-003.md): 1,291 entries, instantly-webhooks to isambard
+- [i-004](i-004.md): 481 entries, isbatak-icons to izumo
+- [j-001](j-001.md): 1,365 entries, j-flow to jiseishin
+- [j-002](j-002.md): 1,384 entries, jishnu-skills to jyl-usage
+- [j-003](j-003.md): 26 entries, jylhis-azure to jz-tanstack-ship
+- [k-001](k-001.md): 1,244 entries, k-deal-skill to ki-verordnung-hochrisiko-pruefer
+- [k-002](k-002.md): 1,338 entries, ki-verordnung-konformitaet to kristofferarn-skills
+- [k-003](k-003.md): 350 entries, krites to kz-marketing
+- [l-001](l-001.md): 1,306 entries, l-lawliet to leak-guard
+- [l-002](l-002.md): 1,305 entries, leak-guard to library
+- [l-003](l-003.md): 1,323 entries, library to live-shopping
+- [l-004](l-004.md): 1,312 entries, live-site-seo to look
+- [l-005](l-005.md): 1,093 entries, look-absent-contrast-rainglow to lzrc-theme
+- [m-001](m-001.md): 1,295 entries, m to Mapbox Cartography
+- [m-002](m-002.md): 1,285 entries, Mapbox Geospatial Operations to mate
+- [m-003](m-003.md): 1,393 entries, mate-companion-mentions to media-date-organizer
+- [m-004](m-004.md): 1,312 entries, media-digest to mesh-design
+- [m-005](m-005.md): 1,280 entries, mesh-live to Minimal Claude Config
+- [m-006](m-006.md): 1,317 entries, Minimal Code Marketplace to model-deployment
+- [m-007](m-007.md): 1,325 entries, model-deployment to move-system
+- [m-008](m-008.md): 1,351 entries, moveindustries-move-skills to mzizi-dev
+- [m-009](m-009.md): 3 entries, mzizzi to mzizzi-ty-lsp
+- [n-001](n-001.md): 1,283 entries, n to network-solutions
+- [n-002](n-002.md): 1,327 entries, network-solutions to nock
+- [n-003](n-003.md): 1,383 entries, nock-prospecting to nuxt-ui-v4
+- [n-004](n-004.md): 165 entries, nuxt-v4 to nzyme
+- [o-001](o-001.md): 1,346 entries, o to okf-remote
+- [o-002](o-002.md): 1,325 entries, okf-remote to openai-jupyter-notebook
+- [o-003](o-003.md): 1,313 entries, openai-jupyter-notebook to orbrey
+- [o-004](o-004.md): 1,272 entries, orbrey-ai to overload
+- [o-005](o-005.md): 206 entries, overlook to ozzit
+- [p-001](p-001.md): 1,337 entries, p to patentrecht
+- [p-002](p-002.md): 1,277 entries, patentrecht to persona
+- [p-003](p-003.md): 1,340 entries, persona to pipeline
+- [p-004](p-004.md): 1,344 entries, Pipeline Review to playwright-best-practices
+- [p-005](p-005.md): 1,356 entries, playwright-best-practices to pngdeity-defaults
+- [p-006](p-006.md): 1,298 entries, pnge-core to powerplatform-alm
+- [p-007](p-007.md): 1,322 entries, powerplatform-core to preset-developer-pack
+- [p-008](p-008.md): 1,214 entries, preset-flutter-pixso-apifox to product-skills
+- [p-009](p-009.md): 1,249 entries, product-skills to prompt
+- [p-010](p-010.md): 1,292 entries, prompt to psf-monitor
+- [p-011](p-011.md): 1,255 entries, psicoterapia-mx to pzmap
+- [q-001](q-001.md): 1,212 entries, q to quickcopy
+- [q-002](q-002.md): 315 entries, quickdesign to qyrusai-assure
+- [r-001](r-001.md): 1,346 entries, r to react-native-preflight
+- [r-002](r-002.md): 1,305 entries, react-native-qa-review to refactor
+- [r-003](r-003.md): 1,348 entries, refactor to repo-analyze
+- [r-004](r-004.md): 1,252 entries, repo-analyzer to resonance
+- [r-005](r-005.md): 1,323 entries, resonance-memory to richmond
+- [r-006](r-006.md): 1,311 entries, richmond-rec-history-to-json to rtfm
+- [r-007](r-007.md): 993 entries, rtfm to rzpro
+- [s-001](s-001.md): 1,230 entries, s to savvy-progress
+- [s-002](s-002.md): 1,248 entries, savvy-progress to scrumia-impl-reactjs
+- [s-003](s-003.md): 1,296 entries, scrumia-impl-rust to security-architect
+- [s-004](s-004.md): 1,281 entries, security-architect to seo
+- [s-005](s-005.md): 1,327 entries, seo to session-switcher
+- [s-006](s-006.md): 1,327 entries, session-sync to shipnote
+- [s-007](s-007.md): 1,344 entries, shipofclaudius to sip-phone-mcp
+- [s-008](s-008.md): 1,308 entries, sipcode to skill-foundry
+- [s-009](s-009.md): 1,346 entries, skill-foundry to skills
+- [s-010](s-010.md): 1,410 entries, skills to smooth-browser
+- [s-011](s-011.md): 1,274 entries, smooth-option-switcher to soundcraft-skills
+- [s-012](s-012.md): 1,286 entries, soundcrate to spk-code-review
+- [s-013](s-013.md): 1,354 entries, spk-design to startup-fundraise
+- [s-014](s-014.md): 1,321 entries, startup-fundraising to strategy-card
+- [s-015](s-015.md): 1,304 entries, strategy-coach to super-team
+- [s-016](s-016.md): 1,322 entries, super-token-saver to swiftui-liquid-glass
+- [s-017](s-017.md): 755 entries, swiftui-macos-skill to sztwiorok-buddy-plugin
+- [t-001](t-001.md): 1,375 entries, t to taxonomist-systematist
+- [t-002](t-002.md): 1,298 entries, taxonomy-creation to tenant-trace
+- [t-003](t-003.md): 1,346 entries, tenantext to the-blessed-handoff
+- [t-004](t-004.md): 1,324 entries, the-blueprint to timeglass-last30days
+- [t-005](t-005.md): 1,448 entries, timeglass-wrapped to tool-permissions
+- [t-006](t-006.md): 1,318 entries, tool-picker to trellis
+- [t-007](t-007.md): 1,356 entries, trellis to ty-lsp-uvx
+- [t-008](t-008.md): 358 entries, ty-python-lsp to Tzurot Deployment Guide
+- [u-001](u-001.md): 1,305 entries, u to universal-plugin
+- [u-002](u-002.md): 1,362 entries, universal-process-os to ux-designer
+- [u-003](u-003.md): 140 entries, ux-designer to uzfintech
+- [v-001](v-001.md): 1,264 entries, v to vgeshel-local-skills
+- [v-002](v-002.md): 1,314 entries, vgi to visuals
+- [v-003](v-003.md): 1,111 entries, visuals to vz-skills
+- [w-001](w-001.md): 1,338 entries, W&B Plot Skill to web-unlock-guard
+- [w-002](w-002.md): 1,333 entries, web-uplift to windmill-hr
+- [w-003](w-003.md): 1,282 entries, windmill-hr to workflow-to-ai
+- [w-004](w-004.md): 1,342 entries, workflow-to-skill to wsh-cockpit
+- [w-005](w-005.md): 206 entries, wshobson to wzrd
+- [x-001](x-001.md): 873 entries, x to xyra-alert
+- [y-001](y-001.md): 909 entries, y to yzmir-training-optimization
+- [z-001](z-001.md): 942 entries, z to zzzz-fleet-kit

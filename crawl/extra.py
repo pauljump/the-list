@@ -144,11 +144,23 @@ def rest_budget(ing):
 
 def untruncate(ing, con):
     """GitHub cuts a recursive listing at 100,000 entries or 7 MB. Walk the tree a level at a time instead."""
+    con.execute("create table if not exists untruncate_gave_up(full_name text primary key)")
     rows = con.execute("select full_name, default_branch from repos where tree_truncated=1 and status in ('treed','done') "
-                       "order by stars desc").fetchall()
+                       "and full_name not in (select full_name from untruncate_gave_up) order by coalesce(disk_kb, 0)").fetchall()
     ing.log(f"untruncate: {len(rows)} repos")
     for k, r in enumerate(rows):
         fn, branch = r["full_name"], r["default_branch"] or "HEAD"
+        if k % 20 == 0:
+            rest_budget(ing)
+        # most were cut by the depth-limited GraphQL listing, not by GitHub: one full listing settles those
+        whole = ing.gh(["-X", "GET", f"repos/{fn}/git/trees/{branch}", "-F", "recursive=1"], ok404=True)
+        if whole and "tree" in whole and not whole.get("truncated"):
+            ing.record_tree(con, fn, branch, [(e["path"], e["type"], e.get("sha"), e.get("size")) for e in whole["tree"]],
+                            whole.get("sha"), False)
+            if k % 100 == 0:
+                ing.log(f"untruncate {k + 1}/{len(rows)} {fn}: one listing was enough")
+            time.sleep(0.5)
+            continue
         rest_budget(ing)
         root = ing.gh(["-X", "GET", f"repos/{fn}/git/trees/{branch}"], ok404=True)
         if not root or "tree" not in root:
@@ -185,6 +197,8 @@ def untruncate(ing, con):
             n_entries, n_comps = ing.record_tree(con, fn, branch, entries, root.get("sha"), False)
             ing.log(f"untruncate {k + 1}/{len(rows)} {fn}: {n_entries} entries, {n_comps} components, {calls} calls")
         else:
+            con.execute("insert or ignore into untruncate_gave_up values(?)", (fn,))
+            con.commit()
             ing.log(f"untruncate {k + 1}/{len(rows)} {fn}: gave up after {calls} calls; kept the cut listing")
 
 

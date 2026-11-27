@@ -1,27 +1,27 @@
 {
- "crawl": "2026-09-19 to 2026-11-24",
- "read": "2026-11-24",
+ "crawl": "2026-09-19 to 2026-11-27",
+ "read": "2026-11-27",
  "queue": {
-  "binary": 332,
+  "binary": 403,
   "error": 1101,
   "gone": 34986,
-  "missing": 626,
-  "ok": 3652629
+  "missing": 674,
+  "ok": 4608034
  },
  "plugins": {
-  "entries": 187380,
-  "pages": 159,
+  "entries": 193501,
+  "pages": 163,
   "csv": [
    "plugins-1.csv",
    "plugins-2.csv"
   ],
-  "rows": 257759,
-  "described": 174700,
-  "gone": 6759
+  "rows": 268663,
+  "described": 180686,
+  "gone": 6808
  },
  "skills": {
-  "entries": 2688670,
-  "pages": 3175,
+  "entries": 3110388,
+  "pages": 3646,
   "csv": [
    "skills-1.csv",
    "skills-2.csv",
@@ -51,16 +51,20 @@
    "skills-26.csv",
    "skills-27.csv",
    "skills-28.csv",
-   "skills-29.csv"
+   "skills-29.csv",
+   "skills-30.csv",
+   "skills-31.csv",
+   "skills-32.csv",
+   "skills-33.csv"
   ],
-  "files": 7342607,
-  "unique": 3350657,
-  "read": 3329861,
-  "described": 2681167
+  "files": 8462611,
+  "unique": 3834198,
+  "read": 3812707,
+  "described": 3101048
  },
  "agents": {
-  "entries": 411250,
-  "pages": 439,
+  "entries": 492068,
+  "pages": 518,
   "csv": [
    "agents-1.csv",
    "agents-2.csv",
@@ -68,52 +72,52 @@
    "agents-4.csv",
    "agents-5.csv"
   ],
-  "files": 856921,
-  "unique": 510730,
-  "read": 504629,
-  "described": 405705
+  "files": 1016602,
+  "unique": 606559,
+  "read": 600341,
+  "described": 485090
  },
  "commands": {
-  "entries": 321510,
-  "pages": 234,
+  "entries": 371162,
+  "pages": 270,
   "csv": [
    "commands-1.csv",
    "commands-2.csv",
    "commands-3.csv"
   ],
-  "files": 644497,
-  "unique": 366564,
-  "read": 362723,
-  "described": 319745
+  "files": 756099,
+  "unique": 421776,
+  "read": 417974,
+  "described": 368566
  },
  "mcp-servers": {
-  "entries": 38767,
-  "pages": 32,
+  "entries": 62022,
+  "pages": 40,
   "csv": [
    "mcp-servers.csv"
   ],
-  "files": 54605,
+  "files": 99095,
   "directory": 4260
  },
  "hooks": {
-  "entries": 92827,
-  "pages": 63,
+  "entries": 102967,
+  "pages": 70,
   "csv": [
    "hooks.csv"
   ],
-  "files": 157209
+  "files": 188144
  },
  "repos": {
-  "entries": 339949,
-  "seen": 419673,
+  "entries": 490888,
+  "seen": 580188,
   "by_status": {
-   "treed": 377251,
-   "gone": 19749,
+   "treed": 539643,
+   "gone": 19746,
    "done": 20,
-   "empty": 469,
-   "resolved": 4881,
-   "skipped": 17163,
-   "new": 140
+   "empty": 739,
+   "resolved": 2774,
+   "skipped": 17160,
+   "new": 106
   }
  }
 }

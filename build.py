@@ -467,7 +467,8 @@ class Build:
                 cmd = "" if "/" in cmd and not cmd.startswith(("npx", "uvx")) else cmd   # local paths say nothing
                 pkg = ""
                 for a in s.get("args") or []:
-                    if isinstance(a, str) and not a.startswith("-") and self.PKG.match(a) and not a.endswith((".js", ".py", ".ts", ".mjs")):
+                    if (isinstance(a, str) and not a.startswith("-") and self.PKG.match(a) and not a.endswith((".js", ".py", ".ts", ".mjs"))
+                            and not EMAIL.search(a)):   # `ssh user@host` is a login, not a package
                         pkg = a
                         break
                 host = ""
@@ -735,7 +736,9 @@ class Build:
                 "Plugins and hooks run code on your machine; read them first.\n",
                 "- Not live. It is a snapshot, and some repos have since moved or gone.\n",
                 "- Not everything. Private repos, and public ones the searches missed, are not here. GitHub's search returns "
-                "at most 1,000 results per query, so files in crowded sizes were not all reachable.\n",
+                "at most 1,000 results per query, so files in crowded sizes were not all reachable. The crawl stopped "
+                "on 2026-11-27 with the code search for small `SKILL.md` files unfinished and the searches for agent, "
+                "command and `.claude/skills` files not run, so repos only those searches would have found are missing.\n",
                 "- Email addresses and anything that looked like a key were removed from descriptions.\n\n",
                 "## Numbers\n\n"]
         for key, title, _ in rows:
